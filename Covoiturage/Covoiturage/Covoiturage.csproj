@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Models\BddContext.cs" />
     <Compile Include="Models\DAL\DALConducteur.cs" />
+    <Compile Include="Models\DAL\DALPassager.cs" />
     <Compile Include="Models\DAL\DALUser.cs" />
     <Compile Include="Models\POCO\Administrateur.cs" />
     <Compile Include="Models\POCO\Conducteur.cs" />
