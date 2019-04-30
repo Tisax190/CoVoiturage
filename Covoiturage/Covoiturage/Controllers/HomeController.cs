@@ -13,7 +13,7 @@ namespace Covoiturage.Controllers
         {
             return View();
 
-        }public ActionResult Login()
+        }public ActionResult Register()
         {
             return View();
         }

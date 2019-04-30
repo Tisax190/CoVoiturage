@@ -1,0 +1,24 @@
+﻿@model Covoiturage.Models.POCO.Utilisateur
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.Nom);
+    @Html.TextBoxFor(x => x.Nom);
+    @Html.LabelFor(x => x.Prenom);
+    @Html.TextBoxFor(x => x.Prenom);
+    @Html.LabelFor(x => x.Login);
+    @Html.TextBoxFor(x => x.Login);
+    @Html.LabelFor(x => x.Mail);
+    <input type="email" name="mail" value="" />
+    @Html.LabelFor(x => x.Password);
+    @Html.PasswordFor(x => x.Password);
+    <label>Utilisateur</label>
+    @Html.RadioButton("type", "user");
+    <label>Conducteur</label>
+    @Html.RadioButton("type", "driver");
+
+    <input type="submit" name="Register" value="Register" />
+}
