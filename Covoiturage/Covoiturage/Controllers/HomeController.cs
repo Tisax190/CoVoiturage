@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Covoiturage.Models.POCO;
+using Covoiturage.Models.DAL;
 
 namespace Covoiturage.Controllers
 {
@@ -16,11 +17,12 @@ namespace Covoiturage.Controllers
 
         }
         [HttpPost]
-        public ActionResult Register(Utilisateur user,string type)
+        public ActionResult Register(Utilisateur user, string type)
         {
             if(type=="driver")
             {
-
+                Conducteur userTmp = user as Conducteur;
+                userTmp.RegisterUser();
             }
             else
             {

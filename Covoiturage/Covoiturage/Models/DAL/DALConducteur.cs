@@ -6,12 +6,17 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALUser
+    public class DALConducteur
     {
         private BddContext bdd;
-        public DALUser()
+        public DALConducteur()
         {
             bdd = new BddContext();
+        }
+
+        public void RegisterDriver(Conducteur driver)
+        {
+            bdd.ListeConducteur.Add(driver);
         }
     }
 }
