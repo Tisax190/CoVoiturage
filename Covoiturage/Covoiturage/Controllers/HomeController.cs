@@ -16,9 +16,23 @@ namespace Covoiturage.Controllers
 
         }
         [HttpPost]
+        public ActionResult Register(Utilisateur user,string type)
+        {
+            if(type=="driver")
+            {
+
+            }
+            else
+            {
+
+            }
+            return View();
+        }
         public ActionResult Register()
         {
             return View();
+
         }
+
     }
 }

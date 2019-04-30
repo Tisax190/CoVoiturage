@@ -115,6 +115,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BddContext.cs" />
+    <Compile Include="Models\DAL\DALUser.cs" />
     <Compile Include="Models\POCO\Administrateur.cs" />
     <Compile Include="Models\POCO\Conducteur.cs" />
     <Compile Include="Models\POCO\Passager.cs" />
@@ -142,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DAL\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
