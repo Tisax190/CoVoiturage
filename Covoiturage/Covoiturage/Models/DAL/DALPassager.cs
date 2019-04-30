@@ -17,6 +17,7 @@ namespace Covoiturage.Models.DAL
         public void RegisterPassager(Passager passager)
         {
             bdd.ListePassager.Add(passager);
+            bdd.SaveChanges();
         }
     }
 }

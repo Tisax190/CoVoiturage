@@ -17,6 +17,7 @@ namespace Covoiturage.Models.DAL
         public void RegisterDriver(Conducteur driver)
         {
             bdd.ListeConducteur.Add(driver);
+            bdd.SaveChanges();
         }
     }
 }

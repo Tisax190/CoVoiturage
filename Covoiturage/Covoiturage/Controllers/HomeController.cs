@@ -21,7 +21,13 @@ namespace Covoiturage.Controllers
         {
             if(type=="driver")
             {
-                Conducteur userTmp = user as Conducteur;
+                Conducteur userTmp = new Conducteur();
+                userTmp.Login = user.Login;
+                userTmp.Password = user.Password;
+                userTmp.Mail = user.Mail;
+                userTmp.Prenom = user.Prenom;
+                userTmp.Nom = user.Nom;
+                userTmp.AnneeExperience = 1;
                 userTmp.RegisterUser();
             }
             else if(type == "user")
