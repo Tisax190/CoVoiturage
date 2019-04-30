@@ -11,6 +11,7 @@ namespace Covoiturage.Models
     {
         public DbSet<Passager> ListePassager { get; set; }
         public DbSet<Administrateur> ListeAdmin { get; set; }
+        public DbSet<Conducteur> ListeConducteur { get; set; }
         public BddContext()
         {
             //Database.SetInitializer(new BddContextInitializer()); ajout en dur dans db
