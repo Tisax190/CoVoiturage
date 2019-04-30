@@ -24,9 +24,9 @@ namespace Covoiturage.Controllers
                 Conducteur userTmp = user as Conducteur;
                 userTmp.RegisterUser();
             }
-            else
+            else if(type == "user")
             {
-
+                Passager psgTmp = user as Passager;
             }
             return View();
         }
