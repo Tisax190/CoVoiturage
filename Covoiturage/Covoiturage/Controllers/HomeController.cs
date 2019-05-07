@@ -66,12 +66,11 @@ namespace Covoiturage.Controllers
                 psg=psg.LoginPassager(login, password);
                 Session["userLoggedDriver"] = psg; // session ok
                 ViewBag.logged = psg.Login;
-
-                /*HttpCookie cookie = new HttpCookie(login);
-                cookie.Expires = DateTime.Now.AddHours(1);
-                Response.Cookies.Add(cookie);*/
             }
-            
+            /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
+            cookie.Expires = DateTime.Now.AddHours(1);
+            Response.Cookies.Add(cookie);*/ 
+
             return View();
         }
         public ActionResult Login()
