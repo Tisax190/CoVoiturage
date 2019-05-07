@@ -13,5 +13,16 @@ namespace Covoiturage.Models.DAL
         {
             bdd = new BddContext();
         }
+        public string GetSalt(string pseudo,string role)
+        {
+            if(role=="driver")
+            {
+                return bdd.ListeConducteur.Where(x => x.Login == pseudo).Select(x => x.Salt).FirstOrDefault();
+            }
+            else
+            {
+                return bdd.ListePassager.Where(x => x.Login == pseudo).Select(x => x.Salt).FirstOrDefault();
+            }
+        }
     }
 }

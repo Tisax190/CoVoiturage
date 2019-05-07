@@ -14,15 +14,31 @@ namespace Covoiturage.Models.POCO
 
         public void RegisterUser()
         {
-            DALConducteur dal = new DALConducteur(); 
+            DALConducteur dal = new DALConducteur();
             dal.RegisterDriver(this);
         }
         public Conducteur LoginConducteur(string pseudo, string mdp)
         {
             DALConducteur dal = new DALConducteur();
+            DALUser dalUser = new DALUser();
+            Utilisateur user = new Utilisateur();
+
             try
             {
-                return dal.Login(pseudo, mdp);
+                string salt = dalUser.GetSalt(pseudo, "driver");
+                user.Password = mdp;
+                user.Salt = salt;
+                user.Login = pseudo;
+                user.Crypt(salt);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            try
+            {
+                return dal.Login(user.Login, user.Password);
             }
             catch (Exception ex)
             {
