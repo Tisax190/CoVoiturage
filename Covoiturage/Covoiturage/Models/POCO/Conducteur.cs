@@ -17,5 +17,17 @@ namespace Covoiturage.Models.POCO
             DALConducteur dal = new DALConducteur(); 
             dal.RegisterDriver(this);
         }
+        public Conducteur LoginConducteur(string pseudo, string mdp)
+        {
+            DALConducteur dal = new DALConducteur();
+            try
+            {
+                return dal.Login(pseudo, mdp);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

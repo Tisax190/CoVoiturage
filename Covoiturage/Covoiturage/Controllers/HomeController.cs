@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Covoiturage.Models.POCO;
 using Covoiturage.Models.DAL;
+using System.Security.Cryptography;
 
 namespace Covoiturage.Controllers
 {
@@ -40,6 +41,41 @@ namespace Covoiturage.Controllers
         {
             return View();
 
+        }
+        public ActionResult Login(string login, string password,string type)
+        {
+            /*Utilisateur userCrypt = new Utilisateur();
+            var salt = userCrypt.GenSalt();
+            string passwordSalt = password + (Convert.ToBase64String(salt));
+
+            HashAlgorithm algorithm = new SHA1Managed();
+            var passwordSaltByte = System.Text.Encoding.ASCII.GetBytes(passwordSalt);
+            var crypted = Convert.ToBase64String(algorithm.ComputeHash(passwordSaltByte));*/
+            
+            if (type=="driver")
+            {
+                Conducteur cdt = new Conducteur();
+                cdt = cdt.LoginConducteur(login,password);
+                Session["userLoggedDriver"] = cdt;
+            }
+            else if(type=="user")
+            {
+                Passager psg = new Passager();
+                psg=psg.LoginPassager(login, password);
+                Session["userLoggedDriver"] = psg; // session ok
+
+                /*HttpCookie cookie = new HttpCookie(login);
+                cookie.Expires = DateTime.Now.AddHours(1);
+                Response.Cookies.Add(cookie);*/
+            }
+
+            return View("Index");
+        }
+        [HttpPost]
+        public ActionResult Disconnect()
+        {
+            Session.Abandon();
+            return View("disconnected");
         }
 
     }

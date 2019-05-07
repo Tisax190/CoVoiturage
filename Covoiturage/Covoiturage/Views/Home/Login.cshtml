@@ -7,5 +7,10 @@
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     @Html.TextBoxFor(x => x.Login);
-    @Html.TextBoxFor(x => x.Password);
+    @Html.PasswordFor(x => x.Password);
+    <label>Utilisateur</label>
+    @Html.RadioButton("type", "user");
+    <label>Conducteur</label>
+    @Html.RadioButton("type", "driver");
+    <input type="submit" name="Login" value="Login" />
 }

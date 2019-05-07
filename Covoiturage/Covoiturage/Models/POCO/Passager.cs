@@ -15,5 +15,17 @@ namespace Covoiturage.Models.POCO
             DALPassager dal = new DALPassager();
             dal.RegisterPassager(this);
         }
+        public Passager LoginPassager(string pseudo,string mdp)
+        {
+            DALPassager dal = new DALPassager();
+            try
+            {
+                return dal.Login(pseudo, mdp);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
