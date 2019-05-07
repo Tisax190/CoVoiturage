@@ -22,7 +22,7 @@ namespace Covoiturage.Models
         {
             protected override void Seed(BddContext context)
             {
-                Utilisateur user = new Utilisateur{ Login="Tisax190",Prenom="Quentin",Nom="Zaretti",Mail="Tisax1900@hotmail.fr",Password="1234" };
+                //Utilisateur user = new Utilisateur{ Login="Tisax190",Prenom="Quentin",Nom="Zaretti",Mail="Tisax1900@hotmail.fr",Password="1234" };
             }
         }
     }

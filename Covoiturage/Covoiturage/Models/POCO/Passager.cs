@@ -19,15 +19,13 @@ namespace Covoiturage.Models.POCO
         {
             DALPassager dal = new DALPassager();
             DALUser dalUser = new DALUser();
-            Utilisateur user = new Utilisateur();
             try
             {
                 string salt=dalUser.GetSalt(pseudo,"passager");
-                user.Password = mdp;
-                user.Salt = salt;
-                user.Login = pseudo;
-                user.Crypt(salt);
-                
+                this.Password = mdp;
+                this.Salt = salt;
+                this.Login = pseudo;
+                this.Crypt(salt);
             }
             catch(Exception ex)
             {
@@ -36,7 +34,7 @@ namespace Covoiturage.Models.POCO
 
             try
             {
-                return dal.Login(user.Login, user.Password);
+                return dal.Login(this.Login, this.Password);
             }
             catch (Exception ex)
             {
