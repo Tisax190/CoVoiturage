@@ -42,6 +42,7 @@ namespace Covoiturage.Controllers
             return View();
 
         }
+        [HttpPost]
         public ActionResult Login(string login, string password,string type)
         {
             /*Utilisateur userCrypt = new Utilisateur();
@@ -57,25 +58,26 @@ namespace Covoiturage.Controllers
                 Conducteur cdt = new Conducteur();
                 cdt = cdt.LoginConducteur(login,password);
                 Session["userLoggedDriver"] = cdt;
+                ViewBag.logged = cdt.Login;
             }
             else if(type=="user")
             {
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
                 Session["userLoggedDriver"] = psg; // session ok
+                ViewBag.logged = psg.Login;
 
                 /*HttpCookie cookie = new HttpCookie(login);
                 cookie.Expires = DateTime.Now.AddHours(1);
                 Response.Cookies.Add(cookie);*/
             }
-
-            return View("Index");
+            
+            return View();
         }
-        [HttpPost]
-        public ActionResult Disconnect()
+        public ActionResult Login()
         {
-            Session.Abandon();
-            return View("disconnected");
+            ViewBag.logged = "non";
+            return View();
         }
 
     }
