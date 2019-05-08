@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using Covoiturage.Models.DAL;
 using System.Security.Cryptography;
+using System.ComponentModel.DataAnnotations;
 
 namespace Covoiturage.Models.POCO
 {

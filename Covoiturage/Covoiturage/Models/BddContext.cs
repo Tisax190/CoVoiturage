@@ -16,7 +16,7 @@ namespace Covoiturage.Models
         public DbSet<Voiture> ListeVoiture { get; set; }
         public BddContext()
         {
-            Database.SetInitializer(new BddContextInitializer()); //ajout en dur dans db
+            Database.SetInitializer(new BddContextInitializer()); 
         }
         public class BddContextInitializer : DropCreateDatabaseIfModelChanges<BddContext>
         {
