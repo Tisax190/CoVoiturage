@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Covoiturage.Models.POCO;
 using System.Data.Entity;
-using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models
 {
@@ -16,7 +12,7 @@ namespace Covoiturage.Models
         public DbSet<Voiture> ListeVoiture { get; set; }
         public BddContext()
         {
-            Database.SetInitializer(new BddContextInitializer()); 
+            Database.SetInitializer(new BddContextInitializer());
         }
         public class BddContextInitializer : DropCreateDatabaseIfModelChanges<BddContext>
         {

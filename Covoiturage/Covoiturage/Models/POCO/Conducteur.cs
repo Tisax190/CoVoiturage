@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Covoiturage.Models.DAL;
+﻿using Covoiturage.Models.DAL;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Covoiturage.Models.POCO
@@ -19,29 +16,31 @@ namespace Covoiturage.Models.POCO
         }
         public Conducteur LoginConducteur(string pseudo, string mdp)
         {
-            DALConducteur dal = new DALConducteur();
-            DALUser dalUser = new DALUser();
-
-            try
+            using (var dalUser = new DALUser())
             {
-                string salt = dalUser.GetSalt(pseudo, "driver");
-                this.Password = mdp;
-                this.Salt = salt;
-                this.Login = pseudo;
-                this.Crypt(salt);
-
+                try
+                {
+                    string salt = dalUser.GetSalt(pseudo, "driver");
+                    Password = mdp;
+                    Salt = salt;
+                    Login = pseudo;
+                    Crypt(salt);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
+            using (var dal = new DALConducteur())
             {
-                throw ex;
-            }
-            try
-            {
-                return dal.Login(this.Login, this.Password);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                try
+                {
+                    return dal.Login(this.Login, this.Password);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }

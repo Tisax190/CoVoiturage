@@ -17,6 +17,8 @@ namespace Covoiturage.Controllers
             return View();
 
         }
+        // Maybe do this in an other class inside a Business Layer?
+
         [HttpPost]
         public ActionResult Register(Utilisateur user, string type)
         {
