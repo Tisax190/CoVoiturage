@@ -31,8 +31,9 @@ namespace Covoiturage.Controllers
                 userTmp.Prenom = user.Prenom;
                 userTmp.Nom = user.Nom;
                 userTmp.AnneeExperience = 1;
+                userTmp.IsBanned = false;
                 userTmp.Crypt();
-                userTmp.RegisterUser();
+                ViewBag.Register = userTmp.RegisterUser();
             }
             else if(type == "user")
             {
@@ -42,15 +43,15 @@ namespace Covoiturage.Controllers
                 userTmp.Mail = user.Mail;
                 userTmp.Prenom = user.Prenom;
                 userTmp.Nom = user.Nom;
+                userTmp.IsBanned = false;
                 userTmp.Crypt();
-                userTmp.RegisterUser();
+                ViewBag.Register = userTmp.RegisterUser();
             }
             return View();
         }
         public ActionResult Register()
         {
             return View();
-
         }
         [HttpPost]
         public ActionResult Login(string login, string password,string type)
@@ -78,6 +79,20 @@ namespace Covoiturage.Controllers
         public ActionResult Login()
         {
             ViewBag.logged = "non";
+            return View();
+        }
+        public ActionResult Administration()
+        {
+            Administrateur admin = new Administrateur();
+            ViewBag.UserList = admin.FetchAllUser();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Administration(string pseudo,string type)
+        {
+            Administrateur admin = new Administrateur();
+            ViewBag.UserList = admin.FetchAllUser();
+            ViewBag.Ban=admin.Ban(pseudo, type);
             return View();
         }
 

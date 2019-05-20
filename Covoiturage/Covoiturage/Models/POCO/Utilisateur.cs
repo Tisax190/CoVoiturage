@@ -12,6 +12,7 @@ namespace Covoiturage.Models.POCO
         public string Password { get; set; }
         public string Mail { get; set; }
         public string Salt { get; set; }
+        public bool IsBanned { get; set; }
 
         public void GenSalt()
         {

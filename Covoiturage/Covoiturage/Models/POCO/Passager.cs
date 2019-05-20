@@ -7,10 +7,10 @@ namespace Covoiturage.Models.POCO
     [Table("Passager")]
     public class Passager : Utilisateur
     {
-        public void RegisterUser()
+        public string RegisterUser()
         {
             DALPassager dal = new DALPassager();
-            dal.RegisterPassager(this);
+            return dal.RegisterPassager(this);
         }
         public Passager LoginPassager(string pseudo, string mdp)
         {

@@ -9,7 +9,7 @@ namespace Covoiturage.Models.POCO
     [Table("Trajet")]
     public class Trajet
     {
-        public int Id;
+        public int Id { get; set; } // AJOUTER ACCESSEUR POUR LE RESTE SINON MARCHE PO
         public int PlaceRestante;
         public int PrixParPersonne;
         public DateTime DateVoyage;

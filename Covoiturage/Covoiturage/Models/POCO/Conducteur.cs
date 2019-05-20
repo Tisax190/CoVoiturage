@@ -9,10 +9,10 @@ namespace Covoiturage.Models.POCO
     {
         public int AnneeExperience { get; set; }
 
-        public void RegisterUser()
+        public string RegisterUser()
         {
             DALConducteur dal = new DALConducteur();
-            dal.RegisterDriver(this);
+            return dal.RegisterDriver(this);
         }
         public Conducteur LoginConducteur(string pseudo, string mdp)
         {

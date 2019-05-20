@@ -29,10 +29,15 @@ namespace Covoiturage.Models.DAL
             }
         }
 
-        public void RegisterDriver(Conducteur driver)
+        public string RegisterDriver(Conducteur driver)
         {
+            if ((bdd.ListeConducteur.Where(x => x.Login == driver.Login).FirstOrDefault()) != null)
+            {
+                return "Pseudo déja utilisé";
+            }
             bdd.ListeConducteur.Add(driver);
             bdd.SaveChanges();
+            return "ok";
         }
         public Conducteur Login(string pseudo, string mdp)
         {
