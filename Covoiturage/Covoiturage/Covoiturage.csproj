@@ -109,7 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\Catalogue.cs" />
+    <Compile Include="Models\DAL\DALTrajet.cs" />
+    <Compile Include="Models\POCO\Catalogue.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -118,9 +119,12 @@
     <Compile Include="Models\DAL\DALConducteur.cs" />
     <Compile Include="Models\DAL\DALPassager.cs" />
     <Compile Include="Models\DAL\DALUser.cs" />
+    <Compile Include="Models\DAL\DALVille.cs" />
+    <Compile Include="Models\DAL\DALVoiture.cs" />
     <Compile Include="Models\POCO\Administrateur.cs" />
     <Compile Include="Models\POCO\Conducteur.cs" />
     <Compile Include="Models\POCO\Passager.cs" />
+    <Compile Include="Models\POCO\Trajet.cs" />
     <Compile Include="Models\POCO\Utilisateur.cs" />
     <Compile Include="Models\POCO\Ville.cs" />
     <Compile Include="Models\POCO\Voiture.cs" />

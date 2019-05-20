@@ -8,6 +8,7 @@ namespace Covoiturage.Models
         public DbSet<Passager> ListePassager { get; set; }
         public DbSet<Administrateur> ListeAdmin { get; set; }
         public DbSet<Conducteur> ListeConducteur { get; set; }
+        public DbSet<Trajet> ListeTrajet { get; set; }
         public DbSet<Ville> ListeVille { get; set; }
         public DbSet<Voiture> ListeVoiture { get; set; }
         public BddContext()
