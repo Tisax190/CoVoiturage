@@ -44,5 +44,15 @@ namespace Covoiturage.Models.DAL
             Conducteur loggedUser = bdd.ListeConducteur.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
             return loggedUser;
         }
+        public string EditValue(Conducteur driver,Conducteur session)
+        {
+            var tmp = bdd.ListeConducteur.Where(x => x.Id == session.Id).FirstOrDefault();
+            tmp.Nom = driver.Nom;
+            tmp.Prenom = driver.Prenom;
+            tmp.Mail = driver.Mail; // faire le mdp
+            session = tmp;
+            bdd.SaveChanges();
+            return "ok";
+        }
     }
 }

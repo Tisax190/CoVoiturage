@@ -67,7 +67,7 @@ namespace Covoiturage.Controllers
             {
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
-                Session["userLoggedDriver"] = psg; // session ok
+                Session["userLoggedPassager"] = psg; // session ok
                 ViewBag.logged = psg.Login;
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
@@ -95,6 +95,17 @@ namespace Covoiturage.Controllers
             ViewBag.Ban=admin.Ban(pseudo, type);
             return View();
         }
+        public ActionResult EditDriver()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditDriver(Conducteur driver)
+        {
+            ViewBag.EditTest=driver.EditValue(driver, Session["userLoggedDriver"] as Conducteur);
+            return View();
+        }
+
 
     }
 }

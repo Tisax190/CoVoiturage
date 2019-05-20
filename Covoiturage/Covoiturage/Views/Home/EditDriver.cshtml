@@ -1,0 +1,24 @@
+﻿@model Covoiturage.Models.POCO.Utilisateur
+@using Covoiturage.Models.POCO
+@{
+    ViewBag.Title = "EditDriver";
+}
+
+@using (Html.BeginForm("EditDriver", "Home", FormMethod.Post))
+{
+    Conducteur driver = Session["userLoggedDriver"] as Conducteur;
+
+    @Html.LabelFor(x => x.Nom);
+    @Html.TextBoxFor(x => x.Nom, new { Required = "Required" , Value =  driver.Nom});
+    @Html.LabelFor(x => x.Prenom);
+    @Html.TextBoxFor(x => x.Prenom, new { Required = "Required", Value = driver.Prenom });
+    @Html.LabelFor(x => x.Login);
+    @Html.TextBoxFor(x => x.Login, new { Required = "Required", Value = driver.Login });
+    @Html.LabelFor(x => x.Mail);
+    <input type="email" name="mail" required="required" value="" />
+    @Html.LabelFor(x => x.Password);
+    @Html.PasswordFor(x => x.Password, new { Required = "Required" });
+    // ajouter les tutures @axel
+    <input type="submit" name="Register" value="Register" />
+}
+@ViewBag.EditTest;;;;;;;;;
