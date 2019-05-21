@@ -68,7 +68,7 @@ namespace Covoiturage.Controllers
             {
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
-                Session["userLoggedPassager"] = psg; // session ok
+                Session["userLoggedgay"] = psg;
                 ViewBag.logged = psg.Login;
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
