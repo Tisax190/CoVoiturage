@@ -58,5 +58,10 @@ namespace Covoiturage.Models.DAL
             bdd.SaveChanges();
             return "ok";
         }
+
+        public List<Voiture> GetVoitures(Conducteur conducteur)
+        {
+            return bdd.ListeConducteur.Where(c => c.Id == conducteur.Id).Select(c => c.Voitures).FirstOrDefault();
+        }
     }
 }

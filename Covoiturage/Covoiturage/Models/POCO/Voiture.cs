@@ -13,6 +13,7 @@ namespace Covoiturage.Models.POCO
         public string Plaque { get; set; }
         public string Modele { get; set; }
         public int PlaceDisponible { get; set; }
+        public Conducteur Proprietaire { get; set; }
 
         public void ChangePlaque(string newPlaque, Voiture voiture)
         {

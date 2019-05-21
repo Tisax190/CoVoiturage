@@ -23,9 +23,10 @@ namespace Covoiturage.Controllers
             return View();
         }
 
-        public ActionResult Voiture()
+        public ActionResult ListeVoiture()
         {
             Verif();
+            ViewData["DriversCars"] = conducteur.Voitures;
             return View();
         }
         

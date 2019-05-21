@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+Covoiturage/.vs/Covoiturage/v15/.suo
+Covoiturage/.vs/Covoiturage/v15/Server/sqlite3/storage.ide
+Covoiturage/.vs/Covoiturage/v15/Server/sqlite3/storage.ide-wal
+*.cache
