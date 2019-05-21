@@ -13,6 +13,10 @@
     @Html.EditorFor(x => x.Plaque, new { Required = "Required" })<br />
     @Html.LabelFor(x => x.PlacesDisponible)
     @Html.EditorFor(x => x.PlacesDisponible, new { Required = "Required" })<br />
-    <input type="submit" value="Ajouter"/>
+    <input type="submit" value="Ajouter"/><br />
 }
+    <form action="~/Conducteur/ListeVoiture" method="post">
+    <br />
+    <input type="submit" value="Annuler"/>
+    </form>
 @ViewBag.succes

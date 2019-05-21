@@ -15,7 +15,7 @@
     @Html.LabelFor(x => x.Login);
     @Html.TextBoxFor(x => x.Login, new { Required = "Required", Value = driver.Login });
     @Html.LabelFor(x => x.Mail);
-    <input type="email" name="mail" required="required" value="" />
+    <input type="email" name="mail" required="required" value="@driver.Mail" />
     @Html.LabelFor(x => x.Password);
     @Html.PasswordFor(x => x.Password, new { Required = "Required" });
     // Ajout des voitures dans la vue "AddVoiture"

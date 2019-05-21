@@ -8,23 +8,10 @@
 @{
     if (ViewBag.DriversCars != null)
     {
-        <table>
-            @foreach (Voiture v in ViewBag.DriversCars)
-            {
-            <tr>
-                <td>
-                    @v.Modele
-                </td>
-                <td>
-                    @v.Plaque
-                </td>
-                <td>
-                    @v.PlacesDisponible
-                </td>
-            </tr>
-            }
-
-        </table>
+        foreach (Voiture v in ViewBag.DriversCars)
+        {
+            <a href="~/Conducteur/EditVoiture?Id=@v.Id">@v.Modele @v.Plaque @v.PlacesDisponible</a>
+        }
     }
     else
     {

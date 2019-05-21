@@ -86,6 +86,26 @@ namespace Covoiturage.Controllers
             }
             return View();
         }
+        
+        public ActionResult EditVoiture(int Id)
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
+            ViewBag.Car = conducteur.Voitures.Where(v => v.Id == Id).FirstOrDefault();
+            return View();
+        }
+
+        public ActionResult EditVoiture()
+        {
+            return Redirect("~/Conducteur/ListeVoiture");
+        }
 
         public ActionResult Logout()
         {

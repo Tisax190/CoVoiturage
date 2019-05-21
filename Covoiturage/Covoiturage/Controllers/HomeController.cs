@@ -62,7 +62,15 @@ namespace Covoiturage.Controllers
                 Conducteur cdt = new Conducteur();
                 cdt = cdt.LoginConducteur(login,password);
                 Session["userLoggedDriver"] = cdt;
-                ViewBag.logged = cdt.Login;
+                try
+                {
+                    ViewBag.logged = cdt.Login;
+                }
+                catch
+                {
+                    ViewBag.logged = "non";
+                    return View();
+                }
                 return Redirect("~/Conducteur/Index");
             }
             else if(type=="user")
@@ -70,7 +78,15 @@ namespace Covoiturage.Controllers
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
                 Session["userLoggedDriver"] = psg;
-                ViewBag.logged = psg.Login;
+                try
+                {
+                    ViewBag.logged = psg.Login;
+                }
+                catch
+                {
+                    ViewBag.logged = "non";
+                    return View();
+                }
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
             cookie.Expires = DateTime.Now.AddHours(1);
