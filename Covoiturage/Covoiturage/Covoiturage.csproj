@@ -109,8 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConducteurController.cs" />
     <Compile Include="Controllers\PassagerController.cs" />
+    <Compile Include="Models\DAL\DALAdmin.cs" />
     <Compile Include="Models\DAL\DALTrajet.cs" />
     <Compile Include="Models\POCO\Catalogue.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -146,6 +148,8 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Passager\Index.cshtml" />
     <Content Include="Views\Conducteur\Index.cshtml" />
+    <Content Include="Views\Home\Administration.cshtml" />
+    <Content Include="Views\Home\EditDriver.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -155,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
