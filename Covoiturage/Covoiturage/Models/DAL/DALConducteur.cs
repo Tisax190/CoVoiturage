@@ -29,10 +29,15 @@ namespace Covoiturage.Models.DAL
             }
         }
 
-        public void RegisterDriver(Conducteur driver)
+        public string RegisterDriver(Conducteur driver)
         {
+            if ((bdd.ListeConducteur.Where(x => x.Login == driver.Login).FirstOrDefault()) != null)
+            {
+                return "Pseudo déja utilisé";
+            }
             bdd.ListeConducteur.Add(driver);
             bdd.SaveChanges();
+            return "ok";
         }
         public Conducteur Login(string pseudo, string mdp)
         {
@@ -42,6 +47,16 @@ namespace Covoiturage.Models.DAL
         public Conducteur Search(Conducteur conducteur)
         {
             return bdd.ListeConducteur.Where(x => x.Id == conducteur.Id).FirstOrDefault();
+        }
+        public string EditValue(Conducteur driver,Conducteur session)
+        {
+            var tmp = bdd.ListeConducteur.Where(x => x.Id == session.Id).FirstOrDefault();
+            tmp.Nom = driver.Nom;
+            tmp.Prenom = driver.Prenom;
+            tmp.Mail = driver.Mail; // faire le mdp
+            session = tmp;
+            bdd.SaveChanges();
+            return "ok";
         }
     }
 }

@@ -13,10 +13,15 @@ namespace Covoiturage.Models.DAL
         {
             bdd = new BddContext();
         }
-
-        public void RegisterPassager(Passager passager)
+        public string RegisterPassager(Passager passager)
         {
+            if((bdd.ListePassager.Where(x=>x.Login==passager.Login).FirstOrDefault())!=null)
+            {
+                return "Pseudo déja utilisé";
+            }
             bdd.ListePassager.Add(passager);
+            bdd.SaveChanges();
+            return "ok";
         }
         public Passager Login(string pseudo,string mdp)
         {
