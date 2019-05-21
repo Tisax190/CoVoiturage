@@ -36,8 +36,12 @@ namespace Covoiturage.Models.DAL
         }
         public Conducteur Login(string pseudo, string mdp)
         {
-            Conducteur loggedUser = bdd.ListeConducteur.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
-            return loggedUser;
+            return bdd.ListeConducteur.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
+        }
+
+        public Conducteur Search(Conducteur conducteur)
+        {
+            return bdd.ListeConducteur.Where(x => x.Id == conducteur.Id).FirstOrDefault();
         }
     }
 }

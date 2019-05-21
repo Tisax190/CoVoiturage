@@ -47,6 +47,7 @@ namespace Covoiturage.Controllers
             }
             return View();
         }
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
@@ -75,6 +76,7 @@ namespace Covoiturage.Controllers
 
             return View();
         }
+        [HttpGet]
         public ActionResult Login()
         {
             ViewBag.logged = "non";

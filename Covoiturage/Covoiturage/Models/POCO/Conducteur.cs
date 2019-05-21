@@ -1,5 +1,6 @@
 ﻿using Covoiturage.Models.DAL;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Covoiturage.Models.POCO
@@ -8,6 +9,7 @@ namespace Covoiturage.Models.POCO
     public class Conducteur : Utilisateur
     {
         public int AnneeExperience { get; set; }
+        public List<Voiture> Voitures { get; set; } 
 
         public void RegisterUser()
         {
@@ -42,6 +44,12 @@ namespace Covoiturage.Models.POCO
                     throw ex;
                 }
             }
+        }
+
+        public Conducteur GetConducteur(Conducteur conducteur)
+        {
+            DALConducteur dal = new DALConducteur();
+            return dal.Search(this);
         }
     }
 }

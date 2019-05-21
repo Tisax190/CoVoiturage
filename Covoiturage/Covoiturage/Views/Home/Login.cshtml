@@ -1,16 +1,20 @@
 ﻿@model Covoiturage.Models.POCO.Utilisateur
 @{
-    
+
 }
 
-<h2>@ViewBag.logged</h2>
+<h2>Connection</h2>
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    @Html.TextBoxFor(x => x.Login, new { Required = "Required" });
-    @Html.PasswordFor(x => x.Password, new { Required = "Required" });
-    <label>Utilisateur</label>
+    <label>Nom utilisateur : </label>
+    @Html.TextBoxFor(x => x.Login, new { Required = "Required" });<br/>
+    <label> Mot de passe : </label>
+    @Html.PasswordFor(x => x.Password, new { Required = "Required" });<br/>
+    <label>Passager</label>
     @Html.RadioButton("type", "user", new { Required = "Required" });
     <label>Conducteur</label>
     @Html.RadioButton("type", "driver", new { Required = "Required" });
     <input type="submit" name="Login" value="Login" />
 }
+
+<p hidden="hidden">@ViewBag.logged</p>
