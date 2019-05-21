@@ -44,10 +44,11 @@ namespace Covoiturage.Models.DAL
             return bdd.ListeConducteur.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
         }
 
-        public Conducteur Search(Conducteur conducteur)
+        public Conducteur GetConducteur(Conducteur conducteur)
         {
             return bdd.ListeConducteur.Where(x => x.Id == conducteur.Id).FirstOrDefault();
         }
+
         public string EditValue(Conducteur driver,Conducteur session)
         {
             var tmp = bdd.ListeConducteur.Where(x => x.Id == session.Id).FirstOrDefault();

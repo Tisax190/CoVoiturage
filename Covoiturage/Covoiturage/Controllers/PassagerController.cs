@@ -9,15 +9,16 @@ namespace Covoiturage.Controllers
 {
     public class PassagerController : Controller
     {
-
-        private void Verif()
+        Passager passager;
+        private bool Verif()
         {
-            if (Session["userLoggedDriver"] == null || !(Session["userLoggedDriver"] is Passager)) Redirect("Home/Login");
+            if (Session["userLoggedDriver"] == null || !(Session["userLoggedDriver"] is Passager)) return false;
+            return true;
         }
         // GET: Passager
         public ActionResult Index()
         {
-            Verif();
+            if (Verif()) Redirect("Home/Login");
             return View();
         }
     }

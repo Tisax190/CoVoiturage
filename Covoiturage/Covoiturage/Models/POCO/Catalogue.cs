@@ -9,8 +9,9 @@ namespace Covoiturage.Models.POCO
     public class Catalogue
     {
         public static Catalogue instance = null;
-        List<Trajet> trajets;
-        public DALTrajet dalTrajet;
+        public List<Trajet> trajets;
+
+        private DALTrajet dalTrajet = new DALTrajet();
 
         public static Catalogue GetInstance
         {
@@ -32,11 +33,13 @@ namespace Covoiturage.Models.POCO
         public void AddTrajet(Trajet t)
         {
             trajets.Add(t);
+            dalTrajet.AddTrajet(t);
         }
 
         public void RemoveTrajet(Trajet t)
         {
             trajets.Remove(t);
+            dalTrajet.AddTrajet(t);
         }
 
     }

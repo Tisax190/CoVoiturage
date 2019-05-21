@@ -150,6 +150,7 @@
     <Content Include="Views\Conducteur\Index.cshtml" />
     <Content Include="Views\Home\Administration.cshtml" />
     <Content Include="Views\Home\EditDriver.cshtml" />
+    <Content Include="Views\Conducteur\Voiture.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
