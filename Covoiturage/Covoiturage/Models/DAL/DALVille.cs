@@ -17,6 +17,7 @@ namespace Covoiturage.Models.DAL
         public void RegisterVille(Ville ville)
         {
             bdd.ListeVille.Add(ville);
+            bdd.SaveChanges();
         }
     }
 }

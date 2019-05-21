@@ -1,0 +1,36 @@
+﻿@using Covoiturage.Models.POCO;
+@{
+    ViewBag.Title = "ListeVoiture";
+}
+
+<h2>Liste de voiture</h2>
+
+@{
+    if (ViewBag.DriversCars != null)
+    {
+        <table>
+            @foreach (Voiture v in ViewBag.DriversCars)
+            {
+            <tr>
+                <td>
+                    @v.Modele
+                </td>
+                <td>
+                    @v.Plaque
+                </td>
+                <td>
+                    @v.PlacesDisponible
+                </td>
+            </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <p>Vous n'avez pas enregistré de voiture pour le moment</p>
+    }
+}
+<form action="~/Conducteur/AddVoiture" method="get">
+    <input type="submit" value="Ajouter voiture" />
+</form>

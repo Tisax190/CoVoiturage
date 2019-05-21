@@ -13,9 +13,9 @@ namespace Covoiturage.Models.POCO
         public int PlaceRestante { get; set; }
         public int PrixParPersonne { get; set; }
         public DateTime DateVoyage { get; set; }
-        public List<int> UtilisateurId { get; set; }
-        public int ConducteurId { get; set; }
+        public List<Utilisateur> Utilisateurs { get; set; }
+        public Conducteur Conducteur { get; set; }
         //Si on a le temps
-        //public List<Commentaire> CommentaireId { get; set; }
+        //public List<Commentaire> Commentaire { get; set; }
     }
 }

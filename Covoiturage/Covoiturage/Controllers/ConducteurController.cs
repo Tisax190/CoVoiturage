@@ -15,12 +15,12 @@ namespace Covoiturage.Controllers
         {
             try
             {
-                conducteur = conducteur.GetConducteur((Conducteur)Session["userLoggedDriver"]);
-                if (conducteur == null) Redirect("Home/Index");
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
             }
             catch
             {
-                Redirect("Home/Index");
+                return Redirect("~/Home/Index");
             }
             return View();
         }
@@ -29,38 +29,41 @@ namespace Covoiturage.Controllers
         {
             try
             {
-                conducteur = conducteur.GetConducteur((Conducteur)Session["userLoggedDriver"]);
-                if (conducteur == null) Redirect("Home/Index");
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
             }
             catch
             {
-                Redirect("Home/Index");
+                return Redirect("~/Home/Index");
             }
             ViewBag.DriversCars = conducteur.Voitures;
             return View();
         }
         
         [HttpPost]
-        public ActionResult AddVoiture(string plaque, string modele, int places)
+        public ActionResult AddVoiture(Voiture v)
         {
             try
             {
-                conducteur = conducteur.GetConducteur((Conducteur)Session["userLoggedDriver"]);
-                if (conducteur == null) Redirect("Home/Index");
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
             }
             catch
             {
-                Redirect("Home/Index");
+                return Redirect("~/Home/Index");
             }
             Voiture voiture = new Voiture();
             if(voiture.GetPlaque() == null)
             {
-                voiture.Modele = modele;
-                voiture.Plaque = plaque;
-                voiture.PlacesDisponible = places;
+                voiture.Modele = v.Modele;
+                voiture.Plaque = v.Plaque;
+                voiture.PlacesDisponible = v.PlacesDisponible;
+                voiture.Proprietaire = conducteur;
                 try
                 {
                     voiture.RegisterVoiture();
+                    ViewBag.succes = "Ajout effectué";
+                    return Redirect("~/Conducteur/ListeVoiture");
                 }
                 catch
                 {
@@ -69,10 +72,25 @@ namespace Covoiturage.Controllers
             }
             return View();
         }
-
+        [HttpGet]
         public ActionResult AddVoiture()
         {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["userLoggedDriver"] = null;
+            return Redirect("~/Home/Index");
         }
     }
 }

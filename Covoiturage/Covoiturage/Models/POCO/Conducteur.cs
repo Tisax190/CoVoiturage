@@ -49,7 +49,7 @@ namespace Covoiturage.Models.POCO
         public Conducteur GetConducteur(Conducteur conducteur)
         {
             DALConducteur dal = new DALConducteur();
-            return dal.GetConducteur(this);
+            return dal.GetConducteur(conducteur.Id);
         }
         public string EditValue(Conducteur driver,Conducteur session)
         {

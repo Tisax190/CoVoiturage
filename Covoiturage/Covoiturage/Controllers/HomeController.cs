@@ -63,12 +63,13 @@ namespace Covoiturage.Controllers
                 cdt = cdt.LoginConducteur(login,password);
                 Session["userLoggedDriver"] = cdt;
                 ViewBag.logged = cdt.Login;
+                return Redirect("~/Conducteur/Index");
             }
             else if(type=="user")
             {
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
-                Session["userLoggedgay"] = psg;
+                Session["userLoggedDriver"] = psg;
                 ViewBag.logged = psg.Login;
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt

@@ -1,0 +1,18 @@
+﻿@model Covoiturage.Models.POCO.Voiture
+@{
+    ViewBag.Title = "AddVoiture";
+}
+
+<h2>AddVoiture</h2>
+
+@using (Html.BeginForm("AddVoiture", "Conducteur", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.Modele)
+    @Html.EditorFor(x => x.Modele, new { Required = "Required" })<br />
+    @Html.LabelFor(x => x.Plaque)
+    @Html.EditorFor(x => x.Plaque, new { Required = "Required" })<br />
+    @Html.LabelFor(x => x.PlacesDisponible)
+    @Html.EditorFor(x => x.PlacesDisponible, new { Required = "Required" })<br />
+    <input type="submit" value="Ajouter"/>
+}
+@ViewBag.succes

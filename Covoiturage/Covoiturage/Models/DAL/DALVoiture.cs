@@ -17,6 +17,7 @@ namespace Covoiturage.Models.DAL
         public void RegisterVoiture(Voiture voiture)
         {
             bdd.ListeVoiture.Add(voiture);
+            bdd.SaveChanges();
         }
 
         public void ChangePlaque(string plaque, Voiture voiture)
