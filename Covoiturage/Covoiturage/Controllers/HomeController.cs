@@ -60,10 +60,10 @@ namespace Covoiturage.Controllers
             if (type=="driver")
             {
                 Conducteur cdt = new Conducteur();
-                cdt = cdt.LoginConducteur(login,password);
-                Session["userLoggedDriver"] = cdt;
                 try
                 {
+                    cdt = cdt.LoginConducteur(login,password);
+                    Session["userLoggedDriver"] = cdt;
                     ViewBag.logged = cdt.Login;
                 }
                 catch
@@ -76,25 +76,26 @@ namespace Covoiturage.Controllers
             else if(type=="user")
             {
                 Passager psg = new Passager();
-                psg=psg.LoginPassager(login, password);
-                Session["userLoggedUser"] = psg;
                 try
                 {
                     ViewBag.logged = psg.Login;
+                    psg=psg.LoginPassager(login, password);
+                    Session["userLoggedUser"] = psg;
                 }
                 catch
                 {
                     ViewBag.logged = "non";
                     return View();
                 }
+                return Redirect("~/Passager/Index");
             }
             else if (type == "admin")
             {
                 Administrateur psg = new Administrateur();
-                psg = psg.LoginAdmin(login, password);
-                Session["userLoggedAdmin"] = psg;
                 try
                 {
+                    psg = psg.LoginAdmin(login, password);
+                    Session["userLoggedAdmin"] = psg;
                     ViewBag.logged = psg.Login;
                 }
                 catch
@@ -102,6 +103,7 @@ namespace Covoiturage.Controllers
                     ViewBag.logged = "non";
                     return View();
                 }
+                return Redirect("~/Admin/Administration");
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
             cookie.Expires = DateTime.Now.AddHours(1);
