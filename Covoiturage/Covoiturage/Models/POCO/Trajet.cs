@@ -20,7 +20,7 @@ namespace Covoiturage.Models.POCO
         public virtual List<Passager> Passagers { get; set; }
         public virtual Conducteur Conducteur { get; set; }
         public virtual Ville VilleDepart { get; set; }
-        public int? VilleTerminusId { get; set; }
+        //public int? VilleTerminusId { get; set; }
         public virtual Ville VilleTerminus { get; set; }
         //Si on a le temps
         //public List<Commentaire> Commentaire { get; set; }

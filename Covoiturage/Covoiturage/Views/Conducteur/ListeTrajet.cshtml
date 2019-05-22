@@ -9,7 +9,7 @@
     {
         foreach (Trajet t in ViewBag.TrajetsConducteur)
         {
-            <p>Départ: @t.VilleDepart Arrivée : @t.VilleTerminus Date : @t.DateVoyage <a href="~/Conducteur/EditTrajet?Id=@t.Id">Modifier</a></p>
+            <p>Départ: @t.VilleDepart Arrivée : @t.VilleTerminus Date : @t.DateVoyage Place(s) restante(s) : @t.PlaceRestante <a href="~/Conducteur/EditTrajet?Id=@t.Id">Modifier</a></p>
         }
     }
     else

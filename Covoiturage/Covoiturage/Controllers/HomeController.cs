@@ -125,6 +125,12 @@ namespace Covoiturage.Controllers
             ViewBag.logged = "non";
             return View();
         }
+        [HttpPost]
+        public ActionResult EditDriver(Conducteur driver)
+        {
+            ViewBag.EditTest=driver.EditValue(driver, Session["userLoggedDriver"] as Conducteur);
+            return View();
+        }
         public ActionResult Disconnect()
         {
             Session.Abandon();
