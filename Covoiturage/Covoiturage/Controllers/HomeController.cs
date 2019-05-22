@@ -88,9 +88,24 @@ namespace Covoiturage.Controllers
                     return View();
                 }
             }
+            else if (type == "admin")
+            {
+                Administrateur psg = new Administrateur();
+                psg = psg.LoginAdmin(login, password);
+                Session["userLoggedDriver"] = psg;
+                try
+                {
+                    ViewBag.logged = psg.Login;
+                }
+                catch
+                {
+                    ViewBag.logged = "non";
+                    return View();
+                }
+            }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
             cookie.Expires = DateTime.Now.AddHours(1);
-            Response.Cookies.Add(cookie);*/ 
+            Response.Cookies.Add(cookie);*/
 
             return View();
         }

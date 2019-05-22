@@ -38,5 +38,10 @@ namespace Covoiturage.Models.DAL
             return "Ban ok";
             
         }
+        public Administrateur Login(string pseudo, string mdp)
+        {
+            Administrateur loggedUser = bdd.ListeAdmin.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
+            return loggedUser;
+        }
     }
 }
