@@ -102,8 +102,9 @@ namespace Covoiturage.Controllers
                 return Redirect("~/Conducteur/ListeVoiture");
             }
             conducteur.Voitures = conducteur.GetVoitures(conducteur);
-            Session["DriversCars"] = conducteur.GetVoiture(Id);
-            var toto = Session["DriversCars"] as Voiture;
+            var temp = conducteur.GetVoiture(Id);
+            temp.Proprietaire = conducteur;
+            Session["DriversCar"] = temp;
             return View();
         }
         [HttpPost]
@@ -114,9 +115,11 @@ namespace Covoiturage.Controllers
                 conducteur = Session["userLoggedDriver"] as Conducteur;
                 ViewBag.Driver = conducteur.Login;
                 voiture.RemoveVoiture();
+                ViewBag.succes = "Suppression effectuée";
             }
             catch
             {
+                ViewBag.succes = "Suppression échouée";
                 return Redirect("~/Home/Index");
             }
             return View();

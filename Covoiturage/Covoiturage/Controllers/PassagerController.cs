@@ -12,13 +12,21 @@ namespace Covoiturage.Controllers
         Passager passager;
         private bool Verif()
         {
-            if (Session["userLoggedDriver"] == null || !(Session["userLoggedDriver"] is Passager)) return false;
+            if (Session["userLoggedUser"] == null || !(Session["userLoggedUser"] is Passager)) return false;
             return true;
         }
         // GET: Passager
         public ActionResult Index()
         {
-            if (Verif()) Redirect("Home/Login");
+            try
+            {
+                passager = Session["userLoggedUser"] as Passager;
+                ViewBag.Driver = passager.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
             return View();
         }
     }
