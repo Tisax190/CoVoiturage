@@ -63,6 +63,10 @@ namespace Covoiturage.Controllers
                 try
                 {
                     cdt = cdt.LoginConducteur(login,password);
+                    if(cdt.IsBanned)
+                    {
+                        return Redirect("~/Home/Ban");
+                    }
                     Session["userLoggedDriver"] = cdt;
                     ViewBag.logged = cdt.Login;
                 }
@@ -78,9 +82,13 @@ namespace Covoiturage.Controllers
                 Passager psg = new Passager();
                 try
                 {
-                    ViewBag.logged = psg.Login;
                     psg=psg.LoginPassager(login, password);
+                    if (psg.IsBanned)
+                    {
+                        return Redirect("~/Home/Ban");
+                    }
                     Session["userLoggedUser"] = psg;
+                    ViewBag.logged = psg.Login;
                 }
                 catch
                 {

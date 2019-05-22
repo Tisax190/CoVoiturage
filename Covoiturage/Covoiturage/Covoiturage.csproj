@@ -156,6 +156,7 @@
     <Content Include="Views\Admin\AccessDenied.cshtml" />
     <Content Include="Views\Passager\EditUser.cshtml" />
     <Content Include="Views\Home\Disconnect.cshtml" />
+    <Content Include="Views\Home\Ban.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
