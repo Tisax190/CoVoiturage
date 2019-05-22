@@ -36,7 +36,7 @@ namespace Covoiturage.Controllers
         [HttpPost]
         public ActionResult EditUser(Passager driver)
         {
-            ViewBag.EditTest = driver.EditValue(driver, Session["userLoggedDriver"] as Conducteur);
+            ViewBag.EditTest = driver.EditValue(driver, Session["userLoggedUser"] as Passager);
             return View();
         }
     }

@@ -21,16 +21,16 @@ namespace Covoiturage.Models.POCO
             v.RegisterVoiture(this);
         }
 
-        public void RemoveVoiture()
+        public void RemoveVoiture(Voiture voiture)
         {
             DALVoiture dal = new DALVoiture();
-            dal.RemoveVoiture(this);
+            dal.RemoveVoiture(voiture);
         }
 
-        public void ChangePlaque(string newPlaque, Voiture voiture)
+        public void EditValue(Voiture voiture, Voiture session)
         {
             DALVoiture dalVoiture= new DALVoiture();
-            dalVoiture.ChangePlaque(newPlaque, voiture);
+            dalVoiture.EditValue(voiture, session);
         }
 
         public string GetPlaque()

@@ -27,6 +27,7 @@ namespace Covoiturage.Models.DAL
 
         public List<Trajet> GetTrajets(Utilisateur user)
         {
+            if (user is Conducteur) return bdd.ListeTrajet.Where(t => t.Conducteur == (user as Conducteur)).ToList();
             return bdd.ListeTrajet.Where(t => t.Utilisateurs.Contains(user)).ToList();
         }
 

@@ -10,10 +10,10 @@
     Voiture car = Session["DriversCar"] as Voiture;
 
     @Html.LabelFor(x => x.Modele);
-    @Html.EditorFor(x => x.Modele, new { Required = "Required", Value = car.Modele });<br />
+    @Html.TextBoxFor(x => x.Modele, new { Required = "Required", Value = car.Modele });<br />
     @Html.LabelFor(x => x.Plaque);
-    @Html.EditorFor(x => x.Plaque, new { Required = "Required", Value = car.Plaque });<br />
+    @Html.TextBoxFor(x => x.Plaque, new { Required = "Required", Value = car.Plaque });<br />
     @Html.LabelFor(x => x.PlacesDisponible);
-    @Html.EditorFor(x => x.PlacesDisponible, new { Required = "Required", Value = car.PlacesDisponible });<br/>
+    <input type="number" name="PlacesDisponible" value="@car.PlacesDisponible"/><br/>
     <input type="submit" value="Ajouter" />  <input type="submit" value="Supprimer" formaction="~/Conducteur/RemoveVoiture">
 }

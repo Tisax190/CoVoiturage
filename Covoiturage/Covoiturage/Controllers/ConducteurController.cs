@@ -10,6 +10,7 @@ namespace Covoiturage.Controllers
     public class ConducteurController : Controller
     {
         Conducteur conducteur;
+        Catalogue catalogue = Catalogue.instance;
         // GET: Conducteur
         public ActionResult Index()
         {
@@ -82,6 +83,7 @@ namespace Covoiturage.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public ActionResult AddVoiture()
         {
@@ -95,6 +97,13 @@ namespace Covoiturage.Controllers
                 return Redirect("~/Home/Index");
             }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditVoiture(Voiture voiture)
+        {
+            voiture.EditValue(voiture, Session["DriversCar"] as Voiture);
+            return Redirect("~/Conducteur/ListeVoiture");
         }
         
         public ActionResult EditVoiture(int Id = 0)
@@ -125,18 +134,18 @@ namespace Covoiturage.Controllers
             {
                 conducteur = Session["userLoggedDriver"] as Conducteur;
                 ViewBag.Driver = conducteur.Login;
-                voiture.RemoveVoiture();
+                voiture.RemoveVoiture(Session["DriversCar"] as Voiture);
                 ViewBag.succes = "Suppression effectuée";
             }
             catch
             {
                 ViewBag.succes = "Suppression échouée";
-                return Redirect("~/Home/Index");
+                return Redirect("~/Conducteur/Index");
             }
-            return View();
+            return Redirect("~/Conducteur/ListeVoiture");
         }
 
-    public ActionResult RemoveVoiture()
+        public ActionResult RemoveVoiture()
         {
             return Redirect("~/Conducteur/ListeVoiture");
         }
@@ -146,6 +155,22 @@ namespace Covoiturage.Controllers
             Session["userLoggedDriver"] = null;
             Session.Abandon();
             return Redirect("~/Home/Index");
+        }
+
+        public ActionResult ListeTrajet()
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
+            catalogue.Regen(conducteur);
+            ViewBag.TrajetConducteur = catalogue.trajets;
+            return View();
         }
     }
 

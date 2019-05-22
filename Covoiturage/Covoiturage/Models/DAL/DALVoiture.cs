@@ -28,10 +28,12 @@ namespace Covoiturage.Models.DAL
             bdd.SaveChanges();
         }
 
-        public void ChangePlaque(string plaque, Voiture voiture)
+        public void EditValue(Voiture voiture, Voiture session)
         {
-            Voiture modif = bdd.ListeVoiture.Where(v => v.Id == voiture.Id).FirstOrDefault();
-            modif.Plaque = plaque;
+            var modif = bdd.ListeVoiture.Where(v => v.Id == session.Id).FirstOrDefault();
+            modif.Modele = voiture.Modele;
+            modif.Plaque = voiture.Plaque;
+            modif.PlacesDisponible = voiture.PlacesDisponible;
             bdd.SaveChanges();
         }
 

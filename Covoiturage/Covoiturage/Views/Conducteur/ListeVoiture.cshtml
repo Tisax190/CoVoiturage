@@ -6,7 +6,7 @@
 <h2>Liste de voiture</h2>
 
 @{
-    if (ViewBag.DriversCars != null)
+    if (ViewBag.DriversCars != null && ViewBag.DriversCars.Count > 0)
     {
         foreach (Voiture v in ViewBag.DriversCars)
         {
@@ -21,3 +21,4 @@
 <form action="~/Conducteur/AddVoiture" method="get">
     <input type="submit" value="Ajouter voiture" />
 </form>
+@ViewBag.succes
