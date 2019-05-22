@@ -24,7 +24,7 @@
         }
     }
 
-    @using (Html.BeginForm("Ban", "Administration", FormMethod.Post))
+    @using (Html.BeginForm("Ban", "Admin", FormMethod.Post))
     {
         @Html.Label("Pseudo","Pseudo");
         @Html.TextBox("Pseudo","", new { Required = "Required" });
@@ -37,7 +37,7 @@
     }
 @ViewBag.Ban;;;;;;;;
 
-    @using (Html.BeginForm("Unban", "Administration", FormMethod.Post))
+    @using (Html.BeginForm("Unban", "Admin", FormMethod.Post))
     {
         @Html.Label("Pseudo","Pseudo");
         @Html.TextBox("Pseudo","", new { Required = "Required" });

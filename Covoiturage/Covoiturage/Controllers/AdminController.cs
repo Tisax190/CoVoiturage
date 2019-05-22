@@ -32,5 +32,13 @@ namespace Covoiturage.Controllers
             ViewBag.Ban = admin.Ban(pseudo, type);
             return View("Administration");
         }
+        [HttpPost]
+        public ActionResult UnBan(string pseudo, string type)
+        {
+            Administrateur admin = new Administrateur();
+            ViewBag.UserList = admin.FetchAllUser();
+            ViewBag.Ban = admin.UnBan(pseudo, type);
+            return View("Administration");
+        }
     }
 }
