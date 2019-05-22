@@ -101,26 +101,28 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Conducteur/ListeVoiture");
             }
-            ViewBag.Car = conducteur.Voitures.Where(v => v.Id == Id).FirstOrDefault();
+            conducteur.Voitures = conducteur.GetVoitures(conducteur);
+            Session["DriversCars"] = conducteur.GetVoiture(Id);
+            var toto = Session["DriversCars"] as Voiture;
             return View();
         }
         [HttpPost]
-        //public ActionResult RemoveVoiture(Voiture voiture)
-        //{
-        //    try
-        //    {
-        //        conducteur = Session["userLoggedDriver"] as Conducteur;
-        //        ViewBag.Driver = conducteur.Login;
-        //    }
-        //    catch
-        //    {
-        //        return Redirect("~/Home/Index");
-        //    }
-            
+        public ActionResult RemoveVoiture(Voiture voiture)
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+                voiture.RemoveVoiture();
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
+            return View();
+        }
 
-        //}
-
-        public ActionResult RemoveVoiture()
+    public ActionResult RemoveVoiture()
         {
             return Redirect("~/Conducteur/ListeVoiture");
         }
