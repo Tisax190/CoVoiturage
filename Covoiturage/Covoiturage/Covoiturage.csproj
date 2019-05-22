@@ -160,6 +160,7 @@
     <Content Include="Views\Home\Ban.cshtml" />
     <Content Include="Views\Conducteur\ListeTrajet.cshtml" />
     <Content Include="Views\Conducteur\AddTrajet.cshtml" />
+    <Content Include="Views\Conducteur\EditTrajet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

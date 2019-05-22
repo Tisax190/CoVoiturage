@@ -27,6 +27,12 @@ namespace Covoiturage.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return Redirect("~/Home/Index");
+        }
+
         public ActionResult EditDriver()
         {
             return View();
@@ -133,7 +139,6 @@ namespace Covoiturage.Controllers
             try
             {
                 conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
                 voiture.RemoveVoiture(Session["DriversCar"] as Voiture);
                 ViewBag.succes = "Suppression effectuée";
             }
@@ -150,12 +155,6 @@ namespace Covoiturage.Controllers
             return Redirect("~/Conducteur/ListeVoiture");
         }
 
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            return Redirect("~/Home/Index");
-        }
-
         public ActionResult ListeTrajet()
         {
             try
@@ -167,8 +166,8 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
-            catalogue.Regen(conducteur);
-            ViewBag.TrajetsConducteur = catalogue.trajets;
+            Trajet trajet = new Trajet(); 
+            ViewBag.TrajetsConducteur = trajet.GetTrajets(conducteur);
             return View();
         }
 
@@ -186,7 +185,7 @@ namespace Covoiturage.Controllers
             }
             Ville v = new Ville();
             trajet.Conducteur = conducteur.GetConducteur();
-            trajet.DateVoyage = Date.ToString();
+            trajet.DateVoyage = Date;
             trajet.VilleDepart = v.GetVille(Depart);
             trajet.VilleTerminus = v.GetVille(Terminus);
             trajet.PlaceRestante = conducteur.GetVoiture(Voiture).PlacesDisponible;
@@ -211,9 +210,21 @@ namespace Covoiturage.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult EditTrajet(string Date, Trajet trajet, int Depart, int Terminus, int Voiture)
+        {
+            conducteur = Session["userLoggedDriver"] as Conducteur;
+            Ville v = new Ville();
+            trajet.Conducteur = conducteur.GetConducteur();
+            trajet.DateVoyage = Date.ToString();
+            trajet.VilleDepart = v.GetVille(Depart);
+            trajet.VilleTerminus = v.GetVille(Terminus);
+            trajet.PlaceRestante = conducteur.GetVoiture(Voiture).PlacesDisponible;
+            trajet.EditValue(trajet, Session["DriversTrip"] as Trajet);
+            return Redirect("~/Conducteur/ListeTrajet");
+        }
 
-
-        public ActionResult EditTrajet()
+        public ActionResult EditTrajet(int Id = 0)
         {
             try
             {
@@ -224,7 +235,37 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
+            if (Id < 0) return Redirect("~/Conducteur/Index");
+            Trajet temp = new Trajet();
+            Ville ville = new Ville();
+            temp = temp.GetTrajet(Id);
+            ViewBag.ListeVilleD = new SelectList(ville.GetAll(), "Id", null, temp.VilleDepart.Id);
+            ViewBag.ListeVilleT = new SelectList(ville.GetAll(), "Id", null, temp.VilleTerminus.Id);
+            ViewBag.ListeVoiture = new SelectList(conducteur.GetVoitures(), "Id", null, 1);
+            Session["DriversTrip"] = temp;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult RemoveTrajet(Trajet trajet)
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                trajet.RemoveTrajet(Session["DriversTrip"] as Trajet);
+                ViewBag.succes = "Suppression effectuée";
+            }
+            catch
+            {
+                ViewBag.succes = "Suppression échouée";
+                return Redirect("~/Conducteur/ListeTrajet");
+            }
+            return Redirect("~/Conducteur/ListeTrajet");
+        }
+
+        public ActionResult RemoveTrajet()
+        {
+            return Redirect("~/Conducteur/ListeTrajet");
         }
     }
 

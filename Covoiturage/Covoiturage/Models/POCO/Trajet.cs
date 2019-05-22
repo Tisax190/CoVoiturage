@@ -20,33 +20,56 @@ namespace Covoiturage.Models.POCO
         public virtual List<Passager> Passagers { get; set; }
         public virtual Conducteur Conducteur { get; set; }
         public virtual Ville VilleDepart { get; set; }
-        //public int? VilleTerminusId { get; set; }
         public virtual Ville VilleTerminus { get; set; }
         //Si on a le temps
         //public List<Commentaire> Commentaire { get; set; }
 
         public void AddTrajet()
         {
-            DALTrajet dalTrajet = new DALTrajet();
-            dalTrajet.AddTrajet(this);
+            DALTrajet dal = new DALTrajet();
+            dal.AddTrajet(this);
         }
 
-        public void RemoveTrajet()
+        public void EditValue(Trajet trajet, Trajet session)
         {
-            DALTrajet dalTrajet = new DALTrajet();
-            dalTrajet.RemoveTrajet(this);
+            DALTrajet dal = new DALTrajet();
+            dal.EditValue(trajet, session);
         }
 
-        public void AddUser(Passager user, Trajet trajet)
+        public void RemoveTrajet(Trajet trajet)
         {
-            DALTrajet dalTrajet = new DALTrajet();
-            dalTrajet.AddUser(trajet, user);
+            DALTrajet dal = new DALTrajet();
+            dal.RemoveTrajet(trajet);
         }
 
-        public void RemoveUser(Passager user, Trajet trajet)
+        public Trajet GetTrajet(int Id)
         {
-            DALTrajet dalTrajet = new DALTrajet();
-            dalTrajet.RemoveUser(trajet, user);
+            DALTrajet dal = new DALTrajet();
+            return dal.GetTrajet(Id);
+        }
+
+        public List<Trajet> GetTrajets()
+        {
+            DALTrajet dal = new DALTrajet();
+            return dal.GetTrajets();
+        }
+
+        public List<Trajet> GetTrajets(Conducteur c)
+        {
+            DALTrajet dal = new DALTrajet();
+            return dal.GetTrajets(c);
+        }
+
+        public void AddPassager(Passager passager, Trajet trajet)
+        {
+            DALTrajet dal = new DALTrajet();
+            dal.AddUser(trajet, passager);
+        }
+
+        public void RemovePassager(Passager passager, Trajet trajet)
+        {
+            DALTrajet dal = new DALTrajet();
+            dal.RemoveUser(trajet, passager);
         }
     }
 }

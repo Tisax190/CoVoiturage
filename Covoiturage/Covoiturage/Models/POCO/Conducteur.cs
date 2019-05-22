@@ -10,6 +10,7 @@ namespace Covoiturage.Models.POCO
     {
         public int AnneeExperience { get; set; }
         public virtual List<Voiture> Voitures { get; set; } 
+        public virtual List<Trajet> Trajets { get; set; }
 
         public string RegisterUser()
         {

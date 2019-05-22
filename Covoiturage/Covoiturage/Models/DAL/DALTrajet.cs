@@ -20,29 +20,50 @@ namespace Covoiturage.Models.DAL
             bdd.SaveChanges();
         }
 
+        public Trajet GetTrajet(int Id)
+        {
+            return bdd.ListeTrajet.Where(t => t.Id == Id).FirstOrDefault();
+        }
+
         public List<Trajet> GetTrajets()
         {
-            return bdd.ListeTrajet.ToList();
+            return bdd.ListeTrajet.Select(t => t).ToList();
+        }
+
+        public List<Trajet> GetTrajets(Conducteur conducteur)
+        {
+            Conducteur temp = bdd.ListeConducteur.Where(c => c.Id == conducteur.Id).FirstOrDefault();
+            Trajet trajet = bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).FirstOrDefault();
+            if (trajet == null) return null;
+            return bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).ToList();
         }
 
         public List<Trajet> GetTrajets(Utilisateur user)
         {
-            //testé et ok
-            if (user is Conducteur)
-            {
-                Conducteur temp = bdd.ListeConducteur.Where(c => c.Id == user.Id).FirstOrDefault();
-                Trajet trajet = bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).FirstOrDefault();
-                if (trajet == null) return null;
-                return bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).ToList();
-            }
             //pas testé
             if (bdd.ListeTrajet.Where(t => t.Passagers.Contains(user)).FirstOrDefault() == null) return null;
             return bdd.ListeTrajet.Where(t => t.Passagers.Contains(user)).ToList();
         }
 
-        public void RemoveTrajet(Trajet t)
+        public void EditValue(Trajet trajet, Trajet session)
         {
-            bdd.ListeTrajet.Remove(t);
+            var modif = bdd.ListeTrajet.Where(t => t.Id == session.Id).FirstOrDefault();
+            var conducteur = bdd.ListeConducteur.Where(c => c.Id == trajet.Conducteur.Id).FirstOrDefault();
+            modif.Conducteur = conducteur;
+            var ville = bdd.ListeVille.Where(v => v.Id == trajet.VilleDepart.Id).FirstOrDefault();
+            modif.VilleDepart = ville;
+            ville = bdd.ListeVille.Where(v => v.Id == trajet.VilleTerminus.Id).FirstOrDefault();
+            modif.VilleTerminus = ville;
+            modif.DateVoyage = trajet.DateVoyage;
+            modif.Distance = trajet.Distance;
+            modif.PlaceRestante = trajet.PlaceRestante;
+            bdd.SaveChanges();
+        }
+
+        public void RemoveTrajet(Trajet trajet)
+        {
+            trajet = bdd.ListeTrajet.Where(t => t.Id == trajet.Id).FirstOrDefault();
+            bdd.ListeTrajet.Remove(trajet);
             bdd.SaveChanges();
         }
 
