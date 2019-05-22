@@ -21,6 +21,13 @@ namespace Covoiturage.Models.DAL
             bdd.SaveChanges();
         }
 
+        public void RemoveVoiture(Voiture voiture)
+        {
+            voiture = bdd.ListeVoiture.Where(v => v.Id == voiture.Id).FirstOrDefault();
+            bdd.ListeVoiture.Remove(voiture);
+            bdd.SaveChanges();
+        }
+
         public void ChangePlaque(string plaque, Voiture voiture)
         {
             Voiture modif = bdd.ListeVoiture.Where(v => v.Id == voiture.Id).FirstOrDefault();
@@ -38,9 +45,16 @@ namespace Covoiturage.Models.DAL
             return bdd.ListeVoiture.Where(v => v.Id == voiture.Id).Select(v => v.PlacesDisponible).FirstOrDefault();
         }
 
+        public Voiture GetVoiture(int Id)
+        {
+            return bdd.ListeVoiture.Where(v => v.Id == Id).FirstOrDefault();
+        }
+
         public List<Voiture> GetVoitures(Conducteur c)
         {
             return bdd.ListeVoiture.Where(v => v.Proprietaire.Id == c.Id).ToList();
         }
+
+
     }
 }

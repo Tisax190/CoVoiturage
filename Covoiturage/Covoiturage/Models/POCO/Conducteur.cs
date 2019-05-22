@@ -57,6 +57,12 @@ namespace Covoiturage.Models.POCO
             return dal.EditValue(driver,session);
         }
 
+        public Voiture GetVoiture(int Id)
+        {
+            DALVoiture dal = new DALVoiture();
+            return dal.GetVoiture(Id);
+        }
+
         public List<Voiture> GetVoitures(Conducteur conducteur)
         {
             DALVoiture dal = new DALVoiture();
