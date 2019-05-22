@@ -16,6 +16,7 @@ namespace Covoiturage.Models.DAL
 
         public void RegisterVoiture(Voiture voiture)
         {
+            voiture.Proprietaire = bdd.ListeConducteur.Where(c => c.Login == voiture.Proprietaire.Login && c.Password == voiture.Proprietaire.Password).FirstOrDefault();
             bdd.ListeVoiture.Add(voiture);
             bdd.SaveChanges();
         }

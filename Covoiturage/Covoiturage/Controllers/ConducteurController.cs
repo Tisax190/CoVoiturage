@@ -58,7 +58,7 @@ namespace Covoiturage.Controllers
                 voiture.Modele = v.Modele;
                 voiture.Plaque = v.Plaque;
                 voiture.PlacesDisponible = v.PlacesDisponible;
-                voiture.Proprietaire = conducteur;
+                voiture.Proprietaire = conducteur.GetConducteur(conducteur);
                 try
                 {
                     voiture.RegisterVoiture();
@@ -87,7 +87,7 @@ namespace Covoiturage.Controllers
             return View();
         }
         
-        public ActionResult EditVoiture(int Id)
+        public ActionResult EditVoiture(int Id = 0)
         {
             try
             {
@@ -98,11 +98,30 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
+            if(Id<1)
+            {
+                return Redirect("~/Conducteur/ListeVoiture");
+            }
             ViewBag.Car = conducteur.Voitures.Where(v => v.Id == Id).FirstOrDefault();
             return View();
         }
+        [HttpPost]
+        //public ActionResult RemoveVoiture(Voiture voiture)
+        //{
+        //    try
+        //    {
+        //        conducteur = Session["userLoggedDriver"] as Conducteur;
+        //        ViewBag.Driver = conducteur.Login;
+        //    }
+        //    catch
+        //    {
+        //        return Redirect("~/Home/Index");
+        //    }
+            
 
-        public ActionResult EditVoiture()
+        //}
+
+        public ActionResult RemoveVoiture()
         {
             return Redirect("~/Conducteur/ListeVoiture");
         }
