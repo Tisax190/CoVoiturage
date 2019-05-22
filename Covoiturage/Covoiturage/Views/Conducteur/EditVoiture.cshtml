@@ -14,6 +14,7 @@
     @Html.LabelFor(x => x.Plaque);
     @Html.TextBoxFor(x => x.Plaque, new { Required = "Required", Value = car.Plaque });<br />
     @Html.LabelFor(x => x.PlacesDisponible);
-    <input type="number" name="PlacesDisponible" value="@car.PlacesDisponible"/><br/>
-    <input type="submit" value="Ajouter" />  <input type="submit" value="Supprimer" formaction="~/Conducteur/RemoveVoiture">
+    <input type="number" name="PlacesDisponible" value="@car.PlacesDisponible" required="required"/><br/>
+    <input type="submit" value="Modifier"/>  <input type="submit" value="Supprimer" formaction="~/Conducteur/RemoveVoiture"><br/>
 }
+<form><input type="submit" value="Retour"/></form>

@@ -112,6 +112,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConducteurController.cs" />
     <Compile Include="Controllers\PassagerController.cs" />
+    <Compile Include="Models\DAL\DALAbstract.cs" />
     <Compile Include="Models\DAL\DALAdmin.cs" />
     <Compile Include="Models\DAL\DALTrajet.cs" />
     <Compile Include="Models\POCO\Catalogue.cs" />
@@ -158,6 +159,7 @@
     <Content Include="Views\Home\Disconnect.cshtml" />
     <Content Include="Views\Home\Ban.cshtml" />
     <Content Include="Views\Conducteur\ListeTrajet.cshtml" />
+    <Content Include="Views\Conducteur\AddTrajet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

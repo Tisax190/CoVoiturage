@@ -1,0 +1,26 @@
+﻿@model Covoiturage.Models.POCO.Trajet
+@{
+    ViewBag.Title = "AddTrajet";
+}
+
+<h2>AddTrajet</h2>
+
+@using (Html.BeginForm("AddTrajet", "Conducteur", FormMethod.Post))
+{
+    @Html.LabelFor(x => x.DateVoyage)
+    <input type="datetime-local" name="Date" value="@DateTime.Today"/><br/>
+    @Html.LabelFor(x => x.Distance)
+    @Html.EditorFor(x => x.Distance, new { Required = "Required" })<br />
+    @Html.LabelFor(x => x.VilleDepart)
+    @Html.DropDownList("Depart", (SelectList)ViewBag.ListeVille)<br />
+    @Html.LabelFor(x => x.VilleTerminus)
+    @Html.DropDownList("Terminus", (SelectList)ViewBag.ListeVille)<br />
+    <label>Voiture</label>
+    @Html.DropDownList("Voiture", (SelectList)ViewBag.ListeVoiture)<br />
+
+    <input type="submit" value="Ajouter" /><br />
+}
+<form action="~/Conducteur/ListeVoiture" method="post">
+    <input type="submit" value="Annuler" />
+</form>
+@ViewBag.succes

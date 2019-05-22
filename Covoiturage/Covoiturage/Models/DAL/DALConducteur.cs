@@ -6,29 +6,8 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALConducteur : IDisposable
+    public class DALConducteur : DALAbstract
     {
-        private BddContext bdd;
-        public DALConducteur()
-        {
-            bdd = new BddContext();
-        }
-        
-        ~DALConducteur()
-        {
-            Dispose();
-        }
-
-        private bool Disposed = false;
-        public void Dispose()
-        {
-            if (!Disposed)
-            {
-                GC.SuppressFinalize(this);
-                Disposed = true;
-            }
-        }
-
         public string RegisterDriver(Conducteur driver)
         {
             if ((bdd.ListeConducteur.Where(x => x.Login == driver.Login).FirstOrDefault()) != null)

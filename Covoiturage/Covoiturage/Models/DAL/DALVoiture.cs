@@ -6,17 +6,11 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALVoiture
+    public class DALVoiture : DALAbstract
     {
-        private BddContext bdd;
-        public DALVoiture()
-        {
-            bdd = new BddContext();
-        }
-
         public void RegisterVoiture(Voiture voiture)
-        {
-            voiture.Proprietaire = bdd.ListeConducteur.Where(c => c.Login == voiture.Proprietaire.Login && c.Password == voiture.Proprietaire.Password).FirstOrDefault();
+        { 
+            voiture.Proprietaire = bdd.ListeConducteur.Where(c => c.Id == voiture.Proprietaire.Id).FirstOrDefault();
             bdd.ListeVoiture.Add(voiture);
             bdd.SaveChanges();
         }

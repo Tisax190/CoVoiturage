@@ -6,13 +6,8 @@ using System.Web;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALAdmin
+    public class DALAdmin : DALAbstract
     {
-        private BddContext bdd;
-        public DALAdmin()
-        {
-            bdd = new BddContext();
-        }
         public Tuple<List<Passager>,List<Conducteur>> FetchAllUser()
         {
             Tuple<List<Passager>, List<Conducteur>> tuple = new Tuple<List<Passager>, List<Conducteur>>(bdd.ListePassager.ToList(),bdd.ListeConducteur.ToList());

@@ -6,13 +6,8 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALPassager
+    public class DALPassager : DALAbstract
     {
-        private BddContext bdd;
-        public DALPassager()
-        {
-            bdd = new BddContext();
-        }
         public string RegisterPassager(Passager passager)
         {
             if((bdd.ListePassager.Where(x=>x.Login==passager.Login).FirstOrDefault())!=null)

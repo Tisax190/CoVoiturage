@@ -6,29 +6,8 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALUser : IDisposable
+    public class DALUser : DALAbstract
     {
-        private BddContext bdd;
-        public DALUser()
-        {
-            bdd = new BddContext();
-        }
-
-        ~DALUser()
-        {
-            Dispose();
-        }
-
-        private bool Disposed = false;
-        public void Dispose()
-        {
-            if (!Disposed)
-            {
-                GC.SuppressFinalize(this);
-                Disposed = true;
-            }
-        }
-
         public string GetSalt(string pseudo,string role)
         {
             if(role=="driver")

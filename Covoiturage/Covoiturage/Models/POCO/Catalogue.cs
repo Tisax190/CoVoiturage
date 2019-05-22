@@ -30,29 +30,5 @@ namespace Covoiturage.Models.POCO
             trajets = dalTrajet.GetTrajets(user);
         }
 
-        public void AddTrajet(Trajet t)
-        {
-            trajets.Add(t);
-            dalTrajet.AddTrajet(t);
-        }
-
-        public void RemoveTrajet(Trajet t)
-        {
-            trajets.Remove(t);
-            dalTrajet.AddTrajet(t);
-        }
-
-        public void AddUser(Utilisateur user, Trajet trajet)
-        {
-            var temp = trajets.Single(t => t.Id == trajet.Id);
-            dalTrajet.AddUser(temp, user);
-        }
-
-        public void RemoveUser(Utilisateur user, Trajet trajet)
-        {
-            var temp = trajets.Single(t => t.Id == trajet.Id);
-            dalTrajet.RemoveUser(temp, user);
-        }
-
     }
 }

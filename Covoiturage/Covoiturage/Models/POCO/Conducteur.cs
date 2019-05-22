@@ -9,7 +9,7 @@ namespace Covoiturage.Models.POCO
     public class Conducteur : Utilisateur
     {
         public int AnneeExperience { get; set; }
-        public List<Voiture> Voitures { get; set; } 
+        public virtual List<Voiture> Voitures { get; set; } 
 
         public string RegisterUser()
         {
@@ -46,10 +46,10 @@ namespace Covoiturage.Models.POCO
             }
         }
 
-        public Conducteur GetConducteur(Conducteur conducteur)
+        public Conducteur GetConducteur()
         {
             DALConducteur dal = new DALConducteur();
-            return dal.GetConducteur(conducteur.Id);
+            return dal.GetConducteur(this.Id);
         }
         public string EditValue(Conducteur driver,Conducteur session)
         {
@@ -63,10 +63,10 @@ namespace Covoiturage.Models.POCO
             return dal.GetVoiture(Id);
         }
 
-        public List<Voiture> GetVoitures(Conducteur conducteur)
+        public List<Voiture> GetVoitures()
         {
-            DALVoiture dal = new DALVoiture();
-            return dal.GetVoitures(conducteur);
+            using (var dal = new DALVoiture())
+                return dal.GetVoitures(this);
         }
     }
 }

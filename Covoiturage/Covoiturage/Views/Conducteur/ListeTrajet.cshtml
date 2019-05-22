@@ -9,7 +9,7 @@
     {
         foreach (Trajet t in ViewBag.TrajetsConducteur)
         {
-            <p>Départ: @t.VilleDepart Arrivée : @t.VilleTerminus Date : @t.DateVoyage.Day/@t.DateVoyage.Month/@t.DateVoyage.Year  Heure : @t.DateVoyage.Hour:@t.DateVoyage.Minute <a href="~/Conducteur/EditTrajet?Id=@t.Id">Modifier</a></p>
+            <p>Départ: @t.VilleDepart Arrivée : @t.VilleTerminus Date : @t.DateVoyage <a href="~/Conducteur/EditTrajet?Id=@t.Id">Modifier</a></p>
         }
     }
     else
@@ -18,7 +18,7 @@
     }
 }
 
-<form action="~/Conducteur/AddTrajet" method="post">
+<form action="~/Conducteur/AddTrajet">
     <input type="submit" value="Ajouter Trajet"/>
     <input type="submit" value="Retour" formaction="~/Conducteur/Index"/>
 </form>

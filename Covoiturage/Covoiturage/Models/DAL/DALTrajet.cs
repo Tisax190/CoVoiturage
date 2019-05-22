@@ -36,8 +36,8 @@ namespace Covoiturage.Models.DAL
                 return bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).ToList();
             }
             //pas testé
-            if (bdd.ListeTrajet.Where(t => t.Utilisateurs.Contains(user)).FirstOrDefault() == null) return null;
-            return bdd.ListeTrajet.Where(t => t.Utilisateurs.Contains(user)).ToList();
+            if (bdd.ListeTrajet.Where(t => t.Passagers.Contains(user)).FirstOrDefault() == null) return null;
+            return bdd.ListeTrajet.Where(t => t.Passagers.Contains(user)).ToList();
         }
 
         public void RemoveTrajet(Trajet t)
@@ -46,22 +46,22 @@ namespace Covoiturage.Models.DAL
             bdd.SaveChanges();
         }
 
-        public void AddUser(Trajet trajet, Utilisateur user)
+        public void AddUser(Trajet trajet, Passager user)
         {
             Trajet modif = bdd.ListeTrajet.Single(t => t.Id == trajet.Id);
-            if (!modif.Utilisateurs.Contains(user))
+            if (!modif.Passagers.Contains(user))
             {
-                modif.Utilisateurs.Add(user);
+                modif.Passagers.Add(user);
                 bdd.SaveChanges();
             }
         }
 
-        public void RemoveUser(Trajet trajet, Utilisateur user)
+        public void RemoveUser(Trajet trajet, Passager user)
         {
             Trajet modif = bdd.ListeTrajet.Single(t => t.Id == trajet.Id);
-            if (modif.Utilisateurs.Contains(user))
+            if (modif.Passagers.Contains(user))
             {
-                modif.Utilisateurs.Remove(user);
+                modif.Passagers.Remove(user);
                 bdd.SaveChanges();
             }
         }

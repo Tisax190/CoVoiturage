@@ -1,5 +1,6 @@
 ﻿using Covoiturage.Models.DAL;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Covoiturage.Models.POCO
@@ -7,6 +8,8 @@ namespace Covoiturage.Models.POCO
     [Table("Passager")]
     public class Passager : Utilisateur
     {
+        public List<Trajet> Trajets { get; set; }
+
         public string RegisterUser()
         {
             DALPassager dal = new DALPassager();

@@ -4,6 +4,7 @@ using Covoiturage.Models.POCO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace Covoiturage.Controllers
 {
@@ -48,8 +49,8 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
-            conducteur.Voitures = conducteur.GetVoitures(conducteur);
-            ViewBag.DriversCars = conducteur.Voitures;
+            var voitures = conducteur.GetVoitures();
+            ViewBag.DriversCars = voitures;
             return View();
         }
         
@@ -65,15 +66,14 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
-            Voiture voiture = new Voiture();
-
-            voiture.Modele = v.Modele;
-            voiture.Plaque = v.Plaque;
-            voiture.PlacesDisponible = v.PlacesDisponible;
-            voiture.Proprietaire = conducteur.GetConducteur(conducteur);
+            
+            v.Proprietaire = new Conducteur
+            {
+                Id = conducteur.Id
+            };
             try
             {
-                voiture.RegisterVoiture();
+                v.RegisterVoiture();
                 ViewBag.succes = "Ajout effectué";
                 return Redirect("~/Conducteur/ListeVoiture");
             }
@@ -121,7 +121,7 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Conducteur/ListeVoiture");
             }
-            conducteur.Voitures = conducteur.GetVoitures(conducteur);
+            conducteur.Voitures = conducteur.GetVoitures();
             var temp = conducteur.GetVoiture(Id);
             temp.Proprietaire = conducteur;
             Session["DriversCar"] = temp;
@@ -169,6 +169,45 @@ namespace Covoiturage.Controllers
             }
             catalogue.Regen(conducteur);
             ViewBag.TrajetsConducteur = catalogue.trajets;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddTrajet(string Date, Trajet trajet, int Depart, int Terminus , int Voiture)
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
+            Ville v = new Ville();
+            trajet.Conducteur = conducteur.GetConducteur();
+            trajet.DateVoyage = Date.ToString();
+            trajet.VilleDepart = v.GetVille(Depart);
+            trajet.VilleTerminus = v.GetVille(Terminus);
+            trajet.PlaceRestante = conducteur.GetVoiture(Voiture).PlacesDisponible;
+            trajet.AddTrajet();
+            return Redirect("~/Conducteur/ListeTrajet");
+        }
+
+        public ActionResult AddTrajet()
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
+            Ville ville = new Ville();
+            ViewBag.ListeVille = new SelectList(ville.GetAll(), "Id", null, 1);
+            ViewBag.ListeVoiture = new SelectList(conducteur.GetVoitures(), "Id", null, 1);
             return View();
         }
     }

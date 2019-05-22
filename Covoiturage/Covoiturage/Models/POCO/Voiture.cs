@@ -7,24 +7,34 @@ using System.Web;
 
 namespace Covoiturage.Models.POCO
 {
+    [Table("Voiture")]
     public class Voiture
     {
         public int Id { get; set; }
         public string Plaque { get; set; }
         public string Modele { get; set; }
         public int PlacesDisponible { get; set; }
-        public Conducteur Proprietaire { get; set; }
+        public virtual Conducteur Proprietaire { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Modele}  {Plaque}  {PlacesDisponible}";
+        }
 
         public void RegisterVoiture()
         {
-            DALVoiture v = new DALVoiture();
-            v.RegisterVoiture(this);
+            using (DALVoiture v = new DALVoiture())
+            {
+                v.RegisterVoiture(this);
+            }
         }
 
         public void RemoveVoiture(Voiture voiture)
         {
-            DALVoiture dal = new DALVoiture();
-            dal.RemoveVoiture(voiture);
+            using (DALVoiture v = new DALVoiture())
+            {
+                v.RemoveVoiture(voiture);
+            }
         }
 
         public void EditValue(Voiture voiture, Voiture session)
