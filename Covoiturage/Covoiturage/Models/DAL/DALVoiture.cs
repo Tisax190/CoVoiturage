@@ -37,5 +37,10 @@ namespace Covoiturage.Models.DAL
         {
             return bdd.ListeVoiture.Where(v => v.Id == voiture.Id).Select(v => v.PlacesDisponible).FirstOrDefault();
         }
+
+        public List<Voiture> GetVoitures(Conducteur c)
+        {
+            return bdd.ListeVoiture.Where(v => v.Proprietaire.Id == c.Id).ToList();
+        }
     }
 }

@@ -36,6 +36,7 @@ namespace Covoiturage.Controllers
             {
                 return Redirect("~/Home/Index");
             }
+            conducteur.Voitures = conducteur.GetVoitures(conducteur);
             ViewBag.DriversCars = conducteur.Voitures;
             return View();
         }
@@ -53,22 +54,20 @@ namespace Covoiturage.Controllers
                 return Redirect("~/Home/Index");
             }
             Voiture voiture = new Voiture();
-            if(voiture.GetPlaque() == null)
+
+            voiture.Modele = v.Modele;
+            voiture.Plaque = v.Plaque;
+            voiture.PlacesDisponible = v.PlacesDisponible;
+            voiture.Proprietaire = conducteur.GetConducteur(conducteur);
+            try
             {
-                voiture.Modele = v.Modele;
-                voiture.Plaque = v.Plaque;
-                voiture.PlacesDisponible = v.PlacesDisponible;
-                voiture.Proprietaire = conducteur.GetConducteur(conducteur);
-                try
-                {
-                    voiture.RegisterVoiture();
-                    ViewBag.succes = "Ajout effectué";
-                    return Redirect("~/Conducteur/ListeVoiture");
-                }
-                catch
-                {
-                    ViewBag.succes = "Ajout échoué";
-                }
+                voiture.RegisterVoiture();
+                ViewBag.succes = "Ajout effectué";
+                return Redirect("~/Conducteur/ListeVoiture");
+            }
+            catch
+            {
+                ViewBag.succes = "Ajout échoué";
             }
             return View();
         }

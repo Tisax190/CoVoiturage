@@ -10,7 +10,7 @@
     {
         foreach (Voiture v in ViewBag.DriversCars)
         {
-            <a href="~/Conducteur/EditVoiture?Id=@v.Id">@v.Modele @v.Plaque @v.PlacesDisponible</a>
+            <a href="~/Conducteur/EditVoiture?Id=@v.Id">@v.Modele @v.Plaque @v.PlacesDisponible</a><br/>
         }
     }
     else
