@@ -8,7 +8,7 @@ namespace Covoiturage.Models.POCO
 {
     public class Catalogue
     {
-        public static Catalogue instance = null;
+        private static Catalogue instance = null;
         public List<Trajet> trajets;
 
         private DALTrajet dalTrajet = new DALTrajet();

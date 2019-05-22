@@ -10,7 +10,7 @@ namespace Covoiturage.Controllers
     public class ConducteurController : Controller
     {
         Conducteur conducteur;
-        Catalogue catalogue = Catalogue.instance;
+        Catalogue catalogue = Catalogue.GetInstance;
         // GET: Conducteur
         public ActionResult Index()
         {
@@ -152,7 +152,6 @@ namespace Covoiturage.Controllers
 
         public ActionResult Logout()
         {
-            Session["userLoggedDriver"] = null;
             Session.Abandon();
             return Redirect("~/Home/Index");
         }
@@ -169,7 +168,7 @@ namespace Covoiturage.Controllers
                 return Redirect("~/Home/Index");
             }
             catalogue.Regen(conducteur);
-            ViewBag.TrajetConducteur = catalogue.trajets;
+            ViewBag.TrajetsConducteur = catalogue.trajets;
             return View();
         }
     }

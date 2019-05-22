@@ -1,0 +1,26 @@
+﻿@using Covoiturage.Models.POCO;
+@{
+    ViewBag.Title = "ListeTrajet";
+}
+
+<h2>Liste de trajet proposé par @ViewBag.Driver</h2>
+@{ 
+    if(ViewBag.TrajetsConducteur != null && ViewBag.TrajetsConducteur is List<Trajet>)
+    {
+        foreach (Trajet t in ViewBag.TrajetsConducteur)
+        {
+            <p>Départ: @t.VilleDepart Arrivée : @t.VilleTerminus Date : @t.DateVoyage.Day/@t.DateVoyage.Month/@t.DateVoyage.Year  Heure : @t.DateVoyage.Hour:@t.DateVoyage.Minute <a href="~/Conducteur/EditTrajet?Id=@t.Id">Modifier</a></p>
+        }
+    }
+    else
+    {
+        <p>Vous ne proposez aucun trajets pour le moment</p>
+    }
+}
+
+<form action="~/Conducteur/AddTrajet" method="post">
+    <input type="submit" value="Ajouter Trajet"/>
+    <input type="submit" value="Retour" formaction="~/Conducteur/Index"/>
+</form>
+
+

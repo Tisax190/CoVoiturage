@@ -27,7 +27,16 @@ namespace Covoiturage.Models.DAL
 
         public List<Trajet> GetTrajets(Utilisateur user)
         {
-            if (user is Conducteur) return bdd.ListeTrajet.Where(t => t.Conducteur == (user as Conducteur)).ToList();
+            //testé et ok
+            if (user is Conducteur)
+            {
+                Conducteur temp = bdd.ListeConducteur.Where(c => c.Id == user.Id).FirstOrDefault();
+                Trajet trajet = bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).FirstOrDefault();
+                if (trajet == null) return null;
+                return bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).ToList();
+            }
+            //pas testé
+            if (bdd.ListeTrajet.Where(t => t.Utilisateurs.Contains(user)).FirstOrDefault() == null) return null;
             return bdd.ListeTrajet.Where(t => t.Utilisateurs.Contains(user)).ToList();
         }
 
@@ -53,7 +62,6 @@ namespace Covoiturage.Models.DAL
             if (modif.Utilisateurs.Contains(user))
             {
                 modif.Utilisateurs.Remove(user);
-                //bdd.ListeTrajet.Find(trajet) = modif;
                 bdd.SaveChanges();
             }
         }

@@ -13,8 +13,13 @@ namespace Covoiturage.Models.POCO
         public int PlaceRestante { get; set; }
         public int PrixParPersonne { get; set; }
         public DateTime DateVoyage { get; set; }
+        public int Distance { get; set; }
+        //Just in case
+        //public string PlaqueVoiture { get; set; }
         public List<Utilisateur> Utilisateurs { get; set; }
         public Conducteur Conducteur { get; set; }
+        public Ville VilleDepart { get; set; }
+        public Ville VilleTerminus { get; set; }
         //Si on a le temps
         //public List<Commentaire> Commentaire { get; set; }
     }

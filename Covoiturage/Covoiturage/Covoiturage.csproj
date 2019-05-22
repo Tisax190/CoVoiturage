@@ -157,6 +157,7 @@
     <Content Include="Views\Passager\EditUser.cshtml" />
     <Content Include="Views\Home\Disconnect.cshtml" />
     <Content Include="Views\Home\Ban.cshtml" />
+    <Content Include="Views\Conducteur\ListeTrajet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
