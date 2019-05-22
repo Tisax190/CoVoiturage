@@ -77,7 +77,7 @@ namespace Covoiturage.Controllers
             {
                 Passager psg = new Passager();
                 psg=psg.LoginPassager(login, password);
-                Session["userLoggedDriver"] = psg;
+                Session["userLoggedUser"] = psg;
                 try
                 {
                     ViewBag.logged = psg.Login;
@@ -92,7 +92,7 @@ namespace Covoiturage.Controllers
             {
                 Administrateur psg = new Administrateur();
                 psg = psg.LoginAdmin(login, password);
-                Session["userLoggedDriver"] = psg;
+                Session["userLoggedAdmin"] = psg;
                 try
                 {
                     ViewBag.logged = psg.Login;
@@ -113,20 +113,6 @@ namespace Covoiturage.Controllers
         public ActionResult Login()
         {
             ViewBag.logged = "non";
-            return View();
-        }
-        public ActionResult Administration()
-        {
-            Administrateur admin = new Administrateur();
-            ViewBag.UserList = admin.FetchAllUser();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Administration(string pseudo,string type)
-        {
-            Administrateur admin = new Administrateur();
-            ViewBag.UserList = admin.FetchAllUser();
-            ViewBag.Ban=admin.Ban(pseudo, type);
             return View();
         }
         public ActionResult EditDriver()
