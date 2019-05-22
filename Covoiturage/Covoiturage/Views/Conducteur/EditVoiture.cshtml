@@ -7,7 +7,7 @@
 <h2>Modification Voiture</h2>
 @using (Html.BeginForm("EditVoiture", "Conducteur", FormMethod.Post))
 {
-    Voiture car = Session["DriversCars"] as Voiture;
+    Voiture car = Session["DriversCar"] as Voiture;
 
     @Html.LabelFor(x => x.Modele);
     @Html.EditorFor(x => x.Modele, new { Required = "Required", Value = car.Modele });<br />
