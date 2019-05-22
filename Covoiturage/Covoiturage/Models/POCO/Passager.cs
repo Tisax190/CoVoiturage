@@ -38,5 +38,10 @@ namespace Covoiturage.Models.POCO
                 throw ex;
             }
         }
+        public string EditValue(Passager driver, Passager session)
+        {
+            DALPassager dal = new DALPassager();
+            return dal.EditValue(driver, session);
+        }
     }
 }

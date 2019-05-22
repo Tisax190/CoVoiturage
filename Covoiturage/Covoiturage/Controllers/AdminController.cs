@@ -25,12 +25,12 @@ namespace Covoiturage.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Administration(string pseudo, string type)
+        public ActionResult Ban(string pseudo, string type)
         {
             Administrateur admin = new Administrateur();
             ViewBag.UserList = admin.FetchAllUser();
             ViewBag.Ban = admin.Ban(pseudo, type);
-            return View();
+            return View("Administration");
         }
     }
 }

@@ -25,6 +25,17 @@ namespace Covoiturage.Controllers
             return View();
         }
 
+        public ActionResult EditDriver()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditDriver(Conducteur driver)
+        {
+            ViewBag.EditTest = driver.EditValue(driver, Session["userLoggedDriver"] as Conducteur);
+            return View();
+        }
+
         public ActionResult ListeVoiture()
         {
             try
@@ -133,7 +144,9 @@ namespace Covoiturage.Controllers
         public ActionResult Logout()
         {
             Session["userLoggedDriver"] = null;
+            Session.Abandon();
             return Redirect("~/Home/Index");
         }
     }
+
 }

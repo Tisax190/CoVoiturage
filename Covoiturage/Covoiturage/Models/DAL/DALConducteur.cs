@@ -54,7 +54,7 @@ namespace Covoiturage.Models.DAL
             var tmp = bdd.ListeConducteur.Where(x => x.Id == session.Id).FirstOrDefault();
             tmp.Nom = driver.Nom;
             tmp.Prenom = driver.Prenom;
-            tmp.Mail = driver.Mail; // faire le mdp
+            tmp.Mail = driver.Mail;
             session = tmp;
             bdd.SaveChanges();
             return "ok";

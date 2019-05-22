@@ -1,0 +1,23 @@
+﻿@model Covoiturage.Models.POCO.Utilisateur
+@using Covoiturage.Models.POCO
+@{
+    ViewBag.Title = "EditUser";
+}
+
+@using (Html.BeginForm("EditUser", "Passager", FormMethod.Post))
+{
+    Passager driver = Session["userLoggedUser"] as Passager;
+
+    @Html.LabelFor(x => x.Nom);
+    @Html.TextBoxFor(x => x.Nom, new { Required = "Required" , Value =  driver.Nom});
+    @Html.LabelFor(x => x.Prenom);
+    @Html.TextBoxFor(x => x.Prenom, new { Required = "Required", Value = driver.Prenom });
+    @Html.LabelFor(x => x.Login);
+    @Html.TextBoxFor(x => x.Login, new { Required = "Required", Value = driver.Login });
+    @Html.LabelFor(x => x.Mail);
+    <input type="email" name="mail" required="required" value="@driver.Mail" />
+    @Html.LabelFor(x => x.Password);
+    @Html.PasswordFor(x => x.Password, new { Required = "Required" });
+    <input type="submit" name="Register" value="Valider" />
+}
+@ViewBag.EditTest

@@ -1,9 +1,11 @@
 ﻿using Covoiturage.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Covoiturage.Models.POCO
 {
+    [Table("Administrateur")]
     public class Administrateur : Utilisateur
     {
         public string Role { get; set; }

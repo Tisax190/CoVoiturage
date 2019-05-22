@@ -28,5 +28,15 @@ namespace Covoiturage.Models.DAL
             Passager loggedUser=bdd.ListePassager.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
             return loggedUser;
         }
+        public string EditValue(Passager driver, Passager session)
+        {
+            var tmp = bdd.ListePassager.Where(x => x.Id == session.Id).FirstOrDefault();
+            tmp.Nom = driver.Nom;
+            tmp.Prenom = driver.Prenom;
+            tmp.Mail = driver.Mail;
+            session = tmp;
+            bdd.SaveChanges();
+            return "ok";
+        }
     }
 }
