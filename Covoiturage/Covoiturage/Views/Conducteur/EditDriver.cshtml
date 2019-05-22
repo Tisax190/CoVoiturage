@@ -4,7 +4,7 @@
     ViewBag.Title = "EditDriver";
 }
 
-@using (Html.BeginForm("EditDriver", "Home", FormMethod.Post))
+@using (Html.BeginForm("EditDriver", "Conducteur", FormMethod.Post))
 {
     Conducteur driver = Session["userLoggedDriver"] as Conducteur;
 
@@ -19,6 +19,6 @@
     @Html.LabelFor(x => x.Password);
     @Html.PasswordFor(x => x.Password, new { Required = "Required" });
     // Ajout des voitures dans la vue "AddVoiture"
-    <input type="submit" name="Register" value="Register" />
+    <input type="submit" name="Register" value="Valider" />
 }
 @ViewBag.EditTest

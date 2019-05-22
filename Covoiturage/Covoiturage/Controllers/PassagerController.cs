@@ -21,5 +21,15 @@ namespace Covoiturage.Controllers
             if (Verif()) Redirect("Home/Login");
             return View();
         }
+        public ActionResult EditUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditUser(Passager driver)
+        {
+            ViewBag.EditTest = driver.EditValue(driver, Session["userLoggedDriver"] as Conducteur);
+            return View();
+        }
     }
 }
