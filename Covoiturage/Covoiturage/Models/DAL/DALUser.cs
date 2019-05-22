@@ -35,6 +35,10 @@ namespace Covoiturage.Models.DAL
             {
                 return bdd.ListeConducteur.Where(x => x.Login == pseudo).Select(x => x.Salt).FirstOrDefault();
             }
+            else if(role == "admin")
+            {
+                return bdd.ListeAdmin.Where(x => x.Login == pseudo).Select(x => x.Salt).FirstOrDefault();
+            }
             else
             {
                 return bdd.ListePassager.Where(x => x.Login == pseudo).Select(x => x.Salt).FirstOrDefault();

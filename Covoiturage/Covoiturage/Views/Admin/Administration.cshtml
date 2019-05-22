@@ -1,0 +1,39 @@
+﻿@using Covoiturage.Models.POCO
+@{
+    ViewBag.Title = "Administration";
+}
+
+<h2>Administration</h2>
+@{
+    Tuple<List<Passager>, List<Conducteur>> tuple = ViewBag.UserList;
+    <h2>Liste des Passager</h2>
+    foreach (var i in tuple.Item1)
+    {
+        <div>
+            <p>@i.Login</p>
+            <p>Ajout liste commentaire ici</p>
+        </div>
+    }
+    <h2>Liste des Conducteur</h2>
+    foreach (var i in tuple.Item2)
+    {
+        <div>
+            <p>@i.Login</p>
+            <p>Ajout liste commentaire ici</p>
+        </div>
+        }
+    }
+
+    @using (Html.BeginForm("Administration", "Home", FormMethod.Post))
+    {
+        @Html.Label("Pseudo","Pseudo");
+        @Html.TextBox("Pseudo","", new { Required = "Required" });
+
+        <label>Utilisateur</label>
+        @Html.RadioButton("type", "user", new { Required = "Required" });
+        <label>Conducteur</label>
+        @Html.RadioButton("type", "driver", new { Required = "Required" });
+        <input type="submit" name="Ban" value="Ban" />
+    }
+@ViewBag.Ban;;;;;;;;
+

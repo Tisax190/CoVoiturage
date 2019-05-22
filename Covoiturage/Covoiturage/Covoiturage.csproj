@@ -148,11 +148,12 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Passager\Index.cshtml" />
     <Content Include="Views\Conducteur\Index.cshtml" />
-    <Content Include="Views\Home\Administration.cshtml" />
+    <Content Include="Views\Admin\Administration.cshtml" />
     <Content Include="Views\Home\EditDriver.cshtml" />
     <Content Include="Views\Conducteur\ListeVoiture.cshtml" />
     <Content Include="Views\Conducteur\AddVoiture.cshtml" />
     <Content Include="Views\Conducteur\EditVoiture.cshtml" />
+    <Content Include="Views\Admin\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -162,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

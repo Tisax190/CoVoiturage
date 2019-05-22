@@ -14,7 +14,10 @@
     @Html.RadioButton("type", "user", new { Required = "Required" });
     <label>Conducteur</label>
     @Html.RadioButton("type", "driver", new { Required = "Required" });
+    <label>Admin</label>
+    @Html.RadioButton("type", "admin", new { Required = "Required" });
     <input type="submit" name="Login" value="Login" />
 }
+
 
 <p>@ViewBag.logged</p>

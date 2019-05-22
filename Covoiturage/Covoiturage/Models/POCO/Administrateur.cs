@@ -18,5 +18,31 @@ namespace Covoiturage.Models.POCO
             DALAdmin admin = new DALAdmin();
             return admin.BanUser(pseudo, type);
         }
+        public Administrateur LoginAdmin(string pseudo, string mdp)
+        {
+            DALAdmin dal = new DALAdmin();
+            DALUser dalUser = new DALUser();
+            try
+            {
+                string salt = dalUser.GetSalt(pseudo, "admin");
+                this.Password = mdp;
+                this.Salt = salt;
+                this.Login = pseudo;
+                this.Crypt(salt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            try
+            {
+                return dal.Login(this.Login, this.Password);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

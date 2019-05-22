@@ -60,10 +60,10 @@ namespace Covoiturage.Controllers
             if (type=="driver")
             {
                 Conducteur cdt = new Conducteur();
-                cdt = cdt.LoginConducteur(login,password);
-                Session["userLoggedDriver"] = cdt;
                 try
                 {
+                    cdt = cdt.LoginConducteur(login,password);
+                    Session["userLoggedDriver"] = cdt;
                     ViewBag.logged = cdt.Login;
                 }
                 catch
@@ -76,10 +76,26 @@ namespace Covoiturage.Controllers
             else if(type=="user")
             {
                 Passager psg = new Passager();
-                psg=psg.LoginPassager(login, password);
-                Session["userLoggedDriver"] = psg;
                 try
                 {
+                    ViewBag.logged = psg.Login;
+                    psg=psg.LoginPassager(login, password);
+                    Session["userLoggedUser"] = psg;
+                }
+                catch
+                {
+                    ViewBag.logged = "non";
+                    return View();
+                }
+                return Redirect("~/Passager/Index");
+            }
+            else if (type == "admin")
+            {
+                Administrateur psg = new Administrateur();
+                try
+                {
+                    psg = psg.LoginAdmin(login, password);
+                    Session["userLoggedAdmin"] = psg;
                     ViewBag.logged = psg.Login;
                 }
                 catch
@@ -87,10 +103,11 @@ namespace Covoiturage.Controllers
                     ViewBag.logged = "non";
                     return View();
                 }
+                return Redirect("~/Admin/Administration");
             }
             /*HttpCookie cookie = new HttpCookie(login); a rajouter quand crypt fini ; doit contenir le salt
             cookie.Expires = DateTime.Now.AddHours(1);
-            Response.Cookies.Add(cookie);*/ 
+            Response.Cookies.Add(cookie);*/
 
             return View();
         }
@@ -98,20 +115,6 @@ namespace Covoiturage.Controllers
         public ActionResult Login()
         {
             ViewBag.logged = "non";
-            return View();
-        }
-        public ActionResult Administration()
-        {
-            Administrateur admin = new Administrateur();
-            ViewBag.UserList = admin.FetchAllUser();
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Administration(string pseudo,string type)
-        {
-            Administrateur admin = new Administrateur();
-            ViewBag.UserList = admin.FetchAllUser();
-            ViewBag.Ban=admin.Ban(pseudo, type);
             return View();
         }
         public ActionResult EditDriver()
