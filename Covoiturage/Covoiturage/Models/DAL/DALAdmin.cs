@@ -38,6 +38,26 @@ namespace Covoiturage.Models.DAL
             return "Ban ok";
             
         }
+        public string UnBanUser(string pseudo, string type)
+        {
+            if (type == "driver")
+            {
+                Conducteur tmp = bdd.ListeConducteur.Where(x => x.Login == pseudo).FirstOrDefault();
+                if (tmp == null)
+                    return "Driver not found";
+                tmp.IsBanned = false;
+            }
+            else if (type == "user")
+            {
+                Utilisateur tmp = bdd.ListePassager.Where(x => x.Login == pseudo).FirstOrDefault();
+                if (tmp == null)
+                    return "Driver not found";
+                tmp.IsBanned = false;
+            }
+            bdd.SaveChanges();
+            return "Ban ok";
+
+        }
         public Administrateur Login(string pseudo, string mdp)
         {
             Administrateur loggedUser = bdd.ListeAdmin.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();

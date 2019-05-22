@@ -20,6 +20,11 @@ namespace Covoiturage.Models.POCO
             DALAdmin admin = new DALAdmin();
             return admin.BanUser(pseudo, type);
         }
+        public string UnBan(string pseudo, string type)
+        {
+            DALAdmin admin = new DALAdmin();
+            return admin.UnBanUser(pseudo, type);
+        }
         public Administrateur LoginAdmin(string pseudo, string mdp)
         {
             DALAdmin dal = new DALAdmin();
