@@ -6,16 +6,16 @@ using Covoiturage.Models.POCO;
 
 namespace Covoiturage.Models.DAL
 {
-    public class DALTrajet
+    public class DALTrajet : DALAbstract
     {
-        private BddContext bdd;
-        public DALTrajet()
-        {
-            bdd = new BddContext();
-        }
-
         public void AddTrajet(Trajet t)
         {
+            var conducteur = bdd.ListeConducteur.Where(c => c.Id == t.Conducteur.Id).FirstOrDefault();
+            t.Conducteur = conducteur;
+            var ville = bdd.ListeVille.Where(v => v.Id == t.VilleDepart.Id).FirstOrDefault();
+            t.VilleDepart = ville;
+            ville = bdd.ListeVille.Where(v => v.Id == t.VilleTerminus.Id).FirstOrDefault();
+            t.VilleTerminus = ville;
             bdd.ListeTrajet.Add(t);
             bdd.SaveChanges();
         }

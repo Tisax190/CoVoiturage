@@ -140,7 +140,7 @@ namespace Covoiturage.Controllers
             catch
             {
                 ViewBag.succes = "Suppression échouée";
-                return Redirect("~/Conducteur/Index");
+                return Redirect("~/Conducteur/ListeVoiture");
             }
             return Redirect("~/Conducteur/ListeVoiture");
         }
@@ -208,6 +208,22 @@ namespace Covoiturage.Controllers
             Ville ville = new Ville();
             ViewBag.ListeVille = new SelectList(ville.GetAll(), "Id", null, 1);
             ViewBag.ListeVoiture = new SelectList(conducteur.GetVoitures(), "Id", null, 1);
+            return View();
+        }
+
+
+
+        public ActionResult EditTrajet()
+        {
+            try
+            {
+                conducteur = Session["userLoggedDriver"] as Conducteur;
+                ViewBag.Driver = conducteur.Login;
+            }
+            catch
+            {
+                return Redirect("~/Home/Index");
+            }
             return View();
         }
     }
