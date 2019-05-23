@@ -166,6 +166,7 @@
     <Content Include="Views\Conducteur\EditTrajet.cshtml" />
     <Content Include="Views\Passager\CatalogueTrajet.cshtml" />
     <Content Include="Views\Passager\CheckReservation.cshtml" />
+    <Content Include="Views\Admin\Ban.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
