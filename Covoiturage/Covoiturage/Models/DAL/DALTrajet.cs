@@ -16,6 +16,7 @@ namespace Covoiturage.Models.DAL
             t.VilleDepart = ville;
             ville = bdd.ListeVille.Where(v => v.Id == t.VilleTerminus.Id).FirstOrDefault();
             t.VilleTerminus = ville;
+            t.PrixParPersonne = t.Distance * Constante.PrixParKm;
             bdd.ListeTrajet.Add(t);
             bdd.SaveChanges();
         }
@@ -56,15 +57,19 @@ namespace Covoiturage.Models.DAL
             modif.VilleTerminus = ville;
             modif.DateVoyage = trajet.DateVoyage;
             modif.Distance = trajet.Distance;
+            modif.PrixParPersonne = trajet.Distance * Constante.PrixParKm;
             modif.PlaceRestante = trajet.PlaceRestante;
             bdd.SaveChanges();
         }
 
         public void RemoveTrajet(Trajet trajet)
         {
-            trajet = bdd.ListeTrajet.Where(t => t.Id == trajet.Id && (t.Passagers == null || t.Passagers.Count == 0)).FirstOrDefault();
-            bdd.ListeTrajet.Remove(trajet);
-            bdd.SaveChanges();
+            trajet = bdd.ListeTrajet.Where(t => t.Id == trajet.Id).FirstOrDefault();
+            if ((trajet.Passagers == null || trajet.Passagers.Count == 0))
+            {
+                bdd.ListeTrajet.Remove(trajet);
+                bdd.SaveChanges();
+            }
         }
 
         public void AddPassager(Trajet trajet, Passager user)
@@ -74,6 +79,7 @@ namespace Covoiturage.Models.DAL
             if (!modif.Passagers.Contains(pass) && modif.PlaceRestante > 0)
             {
                 modif.Passagers.Add(pass);
+                modif.PrixParPersonne = modif.PrixParPersonne / (modif.Passagers.Count());
                 modif.PlaceRestante--;
                 bdd.SaveChanges();
             }
@@ -86,6 +92,8 @@ namespace Covoiturage.Models.DAL
             if (modif.Passagers.Contains(pass))
             {
                 modif.Passagers.Remove(pass);
+                modif.PrixParPersonne = modif.Distance * Constante.PrixParKm;
+                if (modif.Passagers.Count > 0) modif.PrixParPersonne /= (1 + modif.Passagers.Count());
                 modif.PlaceRestante++;
                 bdd.SaveChanges();
             }

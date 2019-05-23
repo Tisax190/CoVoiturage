@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Covoiturage.Models.POCO;
+using Covoiturage.ActionFilterAttributes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using System.Globalization;
 
 namespace Covoiturage.Controllers
 {
+    [ConducteurSessionCheck]
     public class ConducteurController : Controller
     {
         Conducteur conducteur;
@@ -15,15 +17,8 @@ namespace Covoiturage.Controllers
         // GET: Conducteur
         public ActionResult Index()
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
+            ViewBag.Driver = conducteur.Login;
             return View();
         }
 
@@ -46,15 +41,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult ListeVoiture()
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
             var voitures = conducteur.GetVoitures();
             ViewBag.DriversCars = voitures;
             return View();
@@ -63,16 +50,8 @@ namespace Covoiturage.Controllers
         [HttpPost]
         public ActionResult AddVoiture(Voiture v)
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
-            
+            conducteur = Session["userLoggedDriver"] as Conducteur;
+
             v.Proprietaire = new Conducteur
             {
                 Id = conducteur.Id
@@ -93,15 +72,6 @@ namespace Covoiturage.Controllers
         [HttpGet]
         public ActionResult AddVoiture()
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
             return View();
         }
 
@@ -114,16 +84,8 @@ namespace Covoiturage.Controllers
         
         public ActionResult EditVoiture(int Id = 0)
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
-            if(Id<1)
+            conducteur = Session["userLoggedDriver"] as Conducteur;
+            if (Id<1)
             {
                 return Redirect("~/Conducteur/ListeVoiture");
             }
@@ -157,15 +119,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult ListeTrajet()
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
             Trajet trajet = new Trajet(); 
             ViewBag.TrajetsConducteur = trajet.GetTrajets(conducteur);
             return View();
@@ -174,15 +128,7 @@ namespace Covoiturage.Controllers
         [HttpPost]
         public ActionResult AddTrajet(string Date, Trajet trajet, int Depart, int Terminus , int Voiture)
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
             Ville v = new Ville();
             trajet.Conducteur = conducteur.GetConducteur();
             trajet.DateVoyage = Date;
@@ -195,15 +141,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult AddTrajet()
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
             Ville ville = new Ville();
             ViewBag.ListeVille = new SelectList(ville.GetAll(), "Id", null, 1);
             ViewBag.ListeVoiture = new SelectList(conducteur.GetVoitures(), "Id", null, 1);
@@ -226,15 +164,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult EditTrajet(int Id = 0)
         {
-            try
-            {
-                conducteur = Session["userLoggedDriver"] as Conducteur;
-                ViewBag.Driver = conducteur.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            conducteur = Session["userLoggedDriver"] as Conducteur;
             if (Id < 0) return Redirect("~/Conducteur/Index");
             Trajet temp = new Trajet();
             Ville ville = new Ville();
@@ -252,13 +182,13 @@ namespace Covoiturage.Controllers
             try
             {
                 conducteur = Session["userLoggedDriver"] as Conducteur;
+                var temp = trajet;
                 trajet.RemoveTrajet(Session["DriversTrip"] as Trajet);
                 ViewBag.succes = "Suppression effectuée";
             }
             catch
             {
                 ViewBag.succes = "Suppression échouée";
-                return Redirect("~/Conducteur/ListeTrajet");
             }
             return Redirect("~/Conducteur/ListeTrajet");
         }

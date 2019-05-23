@@ -78,20 +78,25 @@ namespace Covoiturage.Models.POCO
             dal.RemovePassager(this, passager);
         }
 
-        public string DisplayForPassager()
+        private string DisplayAvailablePlace()
         {
-            string place;
-
             if (this.PlaceRestante > 0)
             {
-                place = this.PlaceRestante.ToString();
+                return this.PlaceRestante.ToString();
             }
             else
             {
-                place = "Complet";
+                return "Complet";
             }
+        }
 
-            return $"Conducteur : {this.Conducteur.Login} Départ: {this.VilleDepart} | Arrivée : {this.VilleTerminus} | Date : {this.DateVoyage} | Place(s) restante(s) : {place} ";
+        public string DisplayForPassager()
+        {
+            return $"Conducteur : {this.Conducteur.Login} Départ: {this.VilleDepart} | Arrivée : {this.VilleTerminus} | Date : {this.DateVoyage} | Place(s) restante(s) : {DisplayAvailablePlace()} | Prix : {this.PrixParPersonne} €";
+        }
+        public string DisplayForDriver()
+        {
+            return $"Départ: {this.VilleDepart} | Arrivée : {this.VilleTerminus} | Date : {this.DateVoyage} | Place(s) restante(s) : {DisplayAvailablePlace()} | Prix : {this.PrixParPersonne} €";
         }
     }
 }

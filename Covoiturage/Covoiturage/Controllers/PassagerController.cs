@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using Covoiturage.Models.POCO;
+using Covoiturage.ActionFilterAttributes;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Covoiturage.Controllers
 {
+    [PassagerSessionCheck]
     public class PassagerController : Controller
     {
         Passager passager;
         // GET: Passager
         public ActionResult Index()
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            passager = Session["userLoggedUser"] as Passager;
+            ViewBag.User = passager.Login;
             return View();
         }
 
@@ -33,15 +28,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult CatalogueTrajet()
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            passager = Session["userLoggedUser"] as Passager;
             passager.catalogue.Regen(passager.Id);
             ViewBag.Catalogue = passager.catalogue.trajets;
             return View();
@@ -49,15 +36,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult CheckReservation()
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            passager = Session["userLoggedUser"] as Passager;
             Trajet trajet = new Trajet();
             ViewBag.Reservation = trajet.GetReservations(passager);
             return View();
@@ -65,15 +44,6 @@ namespace Covoiturage.Controllers
 
         public ActionResult EditUser()
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
             return View();
         }
         [HttpPost]
@@ -85,15 +55,7 @@ namespace Covoiturage.Controllers
 
         public ActionResult Reservation(int Id)
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Home/Index");
-            }
+            passager = Session["userLoggedUser"] as Passager;
             Trajet trajet = new Trajet();
             trajet = trajet.GetTrajet(Id);
             trajet.AddPassager(passager);
@@ -103,15 +65,7 @@ namespace Covoiturage.Controllers
         [HttpGet]
         public ActionResult Annulation(int Id)
         {
-            try
-            {
-                passager = Session["userLoggedUser"] as Passager;
-                ViewBag.Passager = passager.Login;
-            }
-            catch
-            {
-                return Redirect("~/Passager/Index");
-            }
+            passager = Session["userLoggedUser"] as Passager;
             Trajet trajet = new Trajet();
             trajet = trajet.GetTrajet(Id);
             trajet.RemovePassager(passager);
