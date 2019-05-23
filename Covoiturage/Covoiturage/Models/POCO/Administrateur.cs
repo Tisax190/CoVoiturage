@@ -51,5 +51,10 @@ namespace Covoiturage.Models.POCO
                 throw ex;
             }
         }
+        /*public void AdminSupprimerCommentaire(int id) Décommenter quand commentaire implémenté
+        {
+            DALAdmin dal = new DALAdmin();
+            dal.AdminSupprimerCommentaire(id);
+        }*/
     }
 }

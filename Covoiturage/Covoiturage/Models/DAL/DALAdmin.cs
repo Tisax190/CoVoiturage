@@ -58,5 +58,11 @@ namespace Covoiturage.Models.DAL
             Administrateur loggedUser = bdd.ListeAdmin.Where(x => x.Password == mdp && x.Login == pseudo).FirstOrDefault();
             return loggedUser;
         }
+        /*public void AdminSupprimerCommentaire(int id)
+        {
+            var tmp = bdd.ListeCommentaire.Where(x => x.Id == id).ToList();
+            tmp.Remove(id);
+            bdd.SaveChanges(); A remettre quand commentaire implémenter
+        }*/
     }
 }
