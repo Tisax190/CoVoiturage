@@ -22,7 +22,7 @@ namespace Covoiturage.Models.POCO
         public virtual Ville VilleDepart { get; set; }
         public virtual Ville VilleTerminus { get; set; }
         //Si on a le temps
-        //public List<Commentaire> Commentaire { get; set; }
+        //public List<Commentaire> Commentaire { get; set; } 
 
         public void AddTrajet()
         {
@@ -48,10 +48,16 @@ namespace Covoiturage.Models.POCO
             return dal.GetTrajet(Id);
         }
 
-        public List<Trajet> GetTrajets()
+        public List<Trajet> SearchNewTrajets(int IdPassager)
         {
             DALTrajet dal = new DALTrajet();
-            return dal.GetTrajets();
+            return dal.SearchNewTrajets(IdPassager);
+        }
+
+        public List<Trajet> GetReservations(Passager passager)
+        {
+            DALTrajet dal = new DALTrajet();
+            return dal.GetReservations(passager);
         }
 
         public List<Trajet> GetTrajets(Conducteur c)
@@ -60,16 +66,32 @@ namespace Covoiturage.Models.POCO
             return dal.GetTrajets(c);
         }
 
-        public void AddPassager(Passager passager, Trajet trajet)
+        public void AddPassager(Passager passager)
         {
             DALTrajet dal = new DALTrajet();
-            dal.AddUser(trajet, passager);
+            dal.AddPassager(this, passager);
         }
 
-        public void RemovePassager(Passager passager, Trajet trajet)
+        public void RemovePassager(Passager passager)
         {
             DALTrajet dal = new DALTrajet();
-            dal.RemoveUser(trajet, passager);
+            dal.RemovePassager(this, passager);
+        }
+
+        public string DisplayForPassager()
+        {
+            string place;
+
+            if (this.PlaceRestante > 0)
+            {
+                place = this.PlaceRestante.ToString();
+            }
+            else
+            {
+                place = "Complet";
+            }
+
+            return $"Conducteur : {this.Conducteur.Login} Départ: {this.VilleDepart} | Arrivée : {this.VilleTerminus} | Date : {this.DateVoyage} | Place(s) restante(s) : {place} ";
         }
     }
 }

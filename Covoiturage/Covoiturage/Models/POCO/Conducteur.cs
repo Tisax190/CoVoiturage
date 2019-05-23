@@ -66,8 +66,8 @@ namespace Covoiturage.Models.POCO
 
         public List<Voiture> GetVoitures()
         {
-            using (var dal = new DALVoiture())
-                return dal.GetVoitures(this);
+            DALVoiture dal = new DALVoiture();
+            return dal.GetVoitures(this);
         }
     }
 }

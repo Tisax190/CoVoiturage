@@ -23,10 +23,10 @@ namespace Covoiturage.Models.POCO
             }
         }
 
-        public void Regen()
+        public void Regen(int IdPassager)
         {
             Trajet trajet = new Trajet();
-            trajets = trajet.GetTrajets();
+            trajets = trajet.SearchNewTrajets(IdPassager);
         }
 
     }

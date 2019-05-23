@@ -1,0 +1,21 @@
+﻿@using Covoiturage.Models.POCO;
+@{
+    ViewBag.Title = "CheckReservation";
+}
+
+<h2>Vos réservations</h2>
+
+@{  if (ViewBag.Reservation != null && ViewBag.Reservation is List<Trajet>)
+    {
+        foreach(Trajet t in ViewBag.Reservation)
+        {
+            <p>@t.DisplayForPassager() @Html.ActionLink("Annuler réservation", "Annulation", "Passager", new { Id = t.Id }, htmlAttributes: null)</p>
+        }
+    }
+    else
+    {
+        <p>Vous n'avez pas encore réservé de trajet</p>
+    }
+
+    <form><input type="submit" value="Retour" formaction="~/Passager/Index"/></form>
+}
