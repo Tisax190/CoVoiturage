@@ -64,5 +64,12 @@ namespace Covoiturage.Models.DAL
             tmp.Remove(id);
             bdd.SaveChanges(); A remettre quand commentaire implémenter
         }*/
+        public void ForceDeleteTrajet(int id)
+        {
+            DALTrajet traj = new DALTrajet();
+            Trajet trajet = traj.GetTrajet(id);
+            traj.RemoveTrajetForce(trajet);
+            bdd.SaveChanges();
+        }
     }
 }

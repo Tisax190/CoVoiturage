@@ -38,6 +38,10 @@ namespace Covoiturage.Models.DAL
             if (trajet == null) return null;
             return bdd.ListeTrajet.Where(t => t.Conducteur.Id == temp.Id).ToList();
         }
+        public List<Trajet> GetTrajets()
+        {
+            return bdd.ListeTrajet.ToList();
+        }
 
         public List<Trajet> GetReservations(Passager passager)
         {
@@ -70,6 +74,16 @@ namespace Covoiturage.Models.DAL
                 bdd.ListeTrajet.Remove(trajet);
                 bdd.SaveChanges();
             }
+        }
+        public void RemoveTrajetForce(Trajet trajet)
+        {
+            trajet = bdd.ListeTrajet.Where(t => t.Id == trajet.Id).FirstOrDefault();
+            foreach (var item in trajet.Passagers)
+            {
+                trajet.Passagers.Remove(item);
+            }
+            bdd.ListeTrajet.Remove(trajet);
+            bdd.SaveChanges();
         }
 
         public void AddPassager(Trajet trajet, Passager user)

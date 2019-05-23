@@ -22,6 +22,8 @@ namespace Covoiturage.Controllers
             }
             Administrateur admin = new Administrateur();
             ViewBag.UserList = admin.FetchAllUser();
+            Trajet traj = new Trajet();
+            ViewBag.TrajetListe = traj.GetTrajets();
             return View();
         }
         [HttpPost]
@@ -30,6 +32,8 @@ namespace Covoiturage.Controllers
             Administrateur admin = new Administrateur();
             ViewBag.UserList = admin.FetchAllUser();
             ViewBag.Ban = admin.Ban(pseudo, type);
+            Trajet traj = new Trajet();
+            ViewBag.TrajetListe = traj.GetTrajets();
             return View("Administration");
         }
         [HttpPost]
@@ -38,6 +42,19 @@ namespace Covoiturage.Controllers
             Administrateur admin = new Administrateur();
             ViewBag.UserList = admin.FetchAllUser();
             ViewBag.Ban = admin.UnBan(pseudo, type);
+            Trajet traj = new Trajet();
+            ViewBag.TrajetListe = traj.GetTrajets();
+            return View("Administration");
+        }
+        [HttpPost]
+        public ActionResult ForceDeleteTrajet(string trajet)
+        {
+            int tmp = Convert.ToInt32(trajet);
+            Administrateur admin = new Administrateur();
+            ViewBag.UserList = admin.FetchAllUser();
+            admin.ForceDeleteTrajet(tmp);
+            Trajet traj = new Trajet();
+            ViewBag.TrajetListe = traj.GetTrajets();
             return View("Administration");
         }
     }

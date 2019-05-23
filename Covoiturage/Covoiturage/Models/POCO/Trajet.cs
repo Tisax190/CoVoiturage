@@ -65,7 +65,11 @@ namespace Covoiturage.Models.POCO
             DALTrajet dal = new DALTrajet();
             return dal.GetTrajets(c);
         }
-
+        public List<Trajet> GetTrajets()
+        {
+            DALTrajet dal = new DALTrajet();
+            return dal.GetTrajets();
+        }
         public void AddPassager(Passager passager)
         {
             DALTrajet dal = new DALTrajet();

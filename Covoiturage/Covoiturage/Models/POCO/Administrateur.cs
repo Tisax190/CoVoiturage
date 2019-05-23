@@ -56,5 +56,10 @@ namespace Covoiturage.Models.POCO
             DALAdmin dal = new DALAdmin();
             dal.AdminSupprimerCommentaire(id);
         }*/
+        public void ForceDeleteTrajet(int id)
+        {
+            DALAdmin admin = new DALAdmin();
+            admin.ForceDeleteTrajet(id);
+        }
     }
 }
