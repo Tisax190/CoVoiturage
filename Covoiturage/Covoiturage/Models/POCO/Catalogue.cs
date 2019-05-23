@@ -11,8 +11,6 @@ namespace Covoiturage.Models.POCO
         private static Catalogue instance = null;
         public List<Trajet> trajets;
 
-        private DALTrajet dalTrajet = new DALTrajet();
-
         public static Catalogue GetInstance
         {
             get
@@ -25,9 +23,10 @@ namespace Covoiturage.Models.POCO
             }
         }
 
-        public void Regen(Utilisateur user)
+        public void Regen(int IdPassager)
         {
-            trajets = dalTrajet.GetTrajets(user);
+            Trajet trajet = new Trajet();
+            trajets = trajet.SearchNewTrajets(IdPassager);
         }
 
     }

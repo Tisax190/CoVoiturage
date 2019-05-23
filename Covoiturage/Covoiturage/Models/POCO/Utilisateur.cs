@@ -14,6 +14,8 @@ namespace Covoiturage.Models.POCO
         public string Salt { get; set; }
         public bool IsBanned { get; set; }
 
+        public Catalogue catalogue = Catalogue.GetInstance;
+
         public void GenSalt()
         {
             RNGCryptoServiceProvider rngSp = new RNGCryptoServiceProvider();

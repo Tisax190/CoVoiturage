@@ -1,0 +1,33 @@
+﻿@using Covoiturage.Models.POCO;
+@model Covoiturage.Models.POCO.Trajet
+@{
+    ViewBag.Title = "EditTrajet";
+}
+
+<h2>EditTrajet</h2>
+
+    @using (Html.BeginForm("EditTrajet", "Conducteur", FormMethod.Post))
+    {
+        Trajet trajet = Session["DriversTrip"] as Trajet;
+
+        @Html.LabelFor(x => x.DateVoyage)
+        <input type="datetime-local" name="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")T00:00" value="@trajet.DateVoyage"/><br/>
+        @Html.LabelFor(x => x.Distance)
+        @Html.TextBoxFor(x => x.Distance, new { Required = "Required", Value = trajet.Distance })<br />
+        @Html.LabelFor(x => x.VilleDepart)
+        @Html.DropDownList("Depart", (SelectList)ViewBag.ListeVilleD)<br />
+        @Html.LabelFor(x => x.VilleTerminus)
+        @Html.DropDownList("Terminus", (SelectList)ViewBag.ListeVilleT)<br />
+        <label>Voiture</label>
+        @Html.DropDownList("Voiture", (SelectList)ViewBag.ListeVoiture)<br />
+
+        <input type="submit" value="Modifier" />
+        <input type="submit" value="Supprimer" formaction="~/Conducteur/RemoveTrajet" disabled="@(trajet.Passagers != null && trajet.Passagers.Count > 0)"><br />
+        if (trajet.Passagers != null && trajet.Passagers.Count > 0)
+        {
+            <p>Ce trajet ne peut être elevé car des passagers l'ont réservé</p>
+        }
+    }
+<form action="~/Conducteur/ListeTrajet">
+    <input type="submit" value="Annuler" />
+</form>

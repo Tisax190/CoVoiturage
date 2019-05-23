@@ -10,7 +10,7 @@
     {
         foreach (Voiture v in ViewBag.DriversCars)
         {
-            <a href="~/Conducteur/EditVoiture?Id=@v.Id">@v.Modele @v.Plaque @v.PlacesDisponible</a><br/>
+            <label>@v.Modele | @v.Plaque | @v.PlacesDisponible | <a href="~/Conducteur/EditVoiture?Id=@v.Id">Modifier</a></label><br />
         }
     }
     else
@@ -20,6 +20,6 @@
 }
 <form action="~/Conducteur/AddVoiture" method="get">
     <input type="submit" value="Ajouter voiture" />
-    <input type="submit" value="Retour" formaction="~/Conducteur/Index"/>
+    <input type="submit" value="Retour" formaction="~/Conducteur/Index" />
 </form>
 @ViewBag.succes

@@ -108,10 +108,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilterAttributes\ConducteurSessionCheck.cs" />
+    <Compile Include="ActionFilterAttributes\PassagerSessionCheck.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConducteurController.cs" />
     <Compile Include="Controllers\PassagerController.cs" />
+    <Compile Include="Models\Constante.cs" />
     <Compile Include="Models\DAL\DALAbstract.cs" />
     <Compile Include="Models\DAL\DALAdmin.cs" />
     <Compile Include="Models\DAL\DALTrajet.cs" />
@@ -160,6 +163,9 @@
     <Content Include="Views\Home\Ban.cshtml" />
     <Content Include="Views\Conducteur\ListeTrajet.cshtml" />
     <Content Include="Views\Conducteur\AddTrajet.cshtml" />
+    <Content Include="Views\Conducteur\EditTrajet.cshtml" />
+    <Content Include="Views\Passager\CatalogueTrajet.cshtml" />
+    <Content Include="Views\Passager\CheckReservation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

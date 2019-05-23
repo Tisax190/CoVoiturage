@@ -1,0 +1,36 @@
+﻿@using Covoiturage.Models.POCO;
+@{
+    ViewBag.Title = "CatalogueTrajet";
+}
+
+<h2>Catalogue des trajets</h2>
+
+@{
+    int i = 0;
+    if (ViewBag.Catalogue != null && ViewBag.Catalogue is List<Trajet>)
+    {
+
+        foreach (Trajet t in ViewBag.Catalogue)
+        {
+            string test = $"{DateTime.Today.ToString("yyyy-MM-dd")}T00:00";
+            if (t.DateVoyage.CompareTo(test) > 0)
+            {
+                <p>
+                    @t.DisplayForPassager()
+                    @if (t.PlaceRestante > 0)
+                    {
+                        <a href="~/Passager/Reservation?Id=@t.Id">Reserver</a>
+                    }
+                </p>
+                i++;
+            }
+        }
+
+    }
+    if (i == 0)
+    {
+        <p>Aucun trajet pour le moment</p>
+    }
+
+    <form><input type="submit" value="Retour" formaction="~/Passager/Index" /></form>
+}

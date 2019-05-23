@@ -8,7 +8,7 @@
 @using (Html.BeginForm("AddTrajet", "Conducteur", FormMethod.Post))
 {
     @Html.LabelFor(x => x.DateVoyage)
-    <input type="datetime-local" name="Date" value="@DateTime.Today"/><br/>
+    <input type="datetime-local" name="Date" min="@DateTime.Today.ToString("yyyy-MM-dd")T00:00"/><br/>
     @Html.LabelFor(x => x.Distance)
     @Html.EditorFor(x => x.Distance, new { Required = "Required" })<br />
     @Html.LabelFor(x => x.VilleDepart)
